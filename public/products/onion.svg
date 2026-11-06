@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" fill="none">
+  <rect width="240" height="240" rx="4" fill="#f8fafc"/>
+  <ellipse cx="120" cy="185" rx="55" ry="12" fill="#e2e8f0"/>
+  <!-- Onion body -->
+  <path d="M 120 70 C 85 70, 70 110, 70 140 C 70 170, 95 180, 120 180 C 145 180, 170 170, 170 140 C 170 110, 155 70, 120 70 Z" fill="#9f1239" stroke="#881337" stroke-width="2"/>
+  <path d="M 120 75 C 92 75, 80 112, 80 140 C 80 166, 100 174, 120 174 C 140 174, 160 166, 160 140 C 160 112, 148 75, 120 75 Z" fill="#be123c"/>
+  <path d="M 120 70 L 120 52 M 116 72 L 112 55 M 124 72 L 128 55" stroke="#4ade80" stroke-width="3" stroke-linecap="round"/>
+  <!-- Lines -->
+  <path d="M 100 85 C 92 105, 92 145, 100 165" stroke="#f43f5e" stroke-width="1.5" fill="none"/>
+  <path d="M 140 85 C 148 105, 148 145, 140 165" stroke="#f43f5e" stroke-width="1.5" fill="none"/>
+  <!-- Roots -->
+  <path d="M 115 180 L 110 190 M 120 180 L 120 192 M 125 180 L 130 190" stroke="#d4d4d8" stroke-width="2"/>
+  <!-- Badge -->
+  <rect x="70" y="202" width="100" height="20" rx="3" fill="#fff1f2" stroke="#fecdd3" stroke-width="1"/>
+  <text x="120" y="216" font-family="'Noto Serif Bengali', system-ui, sans-serif" font-size="10" font-weight="700" fill="#9f1239" text-anchor="middle">দেশি লাল পেঁয়াজ</text>
+</svg>

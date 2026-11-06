@@ -1,10 +1,11 @@
 ---
 name: AmarBajar Design System (AB.ds)
 description: >
-  Production-grade design system and UI/UX specification for AmarBajar.
-  Built on a strict 3-color hierarchy (60-30-10 senior rule), mobile-first
-  architecture with Facebook/Instagram-inspired bottom navigation, crisp
-  rounded-sm geometry, subtle shadows (shadow-sm resting, shadow-md max hover),
+  Production-grade design system and UI/UX specification for AmarBajar —
+  a Hyperlocal Multi-Category E-Commerce & Delivery Platform.
+  Built on a strict 3-color hierarchy (60-30-10 senior rule), a Two-Track
+  Fulfillment Architecture (Combined Grocery + Medicine vs. Standalone LP Gas),
+  mobile-first app-like ergonomics, crisp rounded-sm geometry (4px max),
   and fast 150ms transitions. Integrated with Tailwind CSS v4, shadcn/ui,
   Lucide React, and React Icons.
 colors:
@@ -23,13 +24,17 @@ colors:
       primaryHover: "#047857"
       primaryLight: "#ECFDF5"
       primaryForeground: "#FFFFFF"
+  vertical_accents:
+    grocery: "#059669" # Emerald
+    pharmacy: "#0284C7" # Sky/Medical Blue (subdued accent)
+    lpgas: "#EA580C" # Flame Orange (alert/express accent)
   semantic:
     destructive: "#DC2626"
     destructiveLight: "#FEF2F2"
     success: "#16A34A"
     warning: "#D97706"
 typography:
-  family: "Inter, system-ui, -apple-system, sans-serif"
+  family: "'Noto Serif Bengali', serif"
   weights:
     regular: 400
     medium: 500
@@ -61,291 +66,216 @@ motion:
   transition: "all 150ms ease-out"
 ---
 
-# AmarBajar Design System (AB.ds)
+# AmarBajar Design System (AB.ds) & Platform Architecture
 
-> **Core Philosophy:** *Clarity Over Clutter. Speed Over Spectacle. Consistency Is King.*  
-> AmarBajar is a modern, high-conversion e-commerce marketplace platform. Every layout, component, and interaction is engineered to direct the user's attention straight to what matters: finding, trusting, and buying products effortlessly.
-
----
-
-## 1. System Identity & Core Tenets
-
-AmarBajar follows visual cues from modern platforms like **Dribbble Minimalist Showcase**, **Pinterest Card Grids**, and top-tier consumer apps:
-
-1. **Strict 3-Color Hierarchy**: No rainbow palettes. The eye immediately knows where to focus.
-2. **Mobile-First Layout**: 70%+ of marketplace shopping happens on mobile screens. We design for mobile first, then progressively enhance for desktop.
-3. **App-Like Mobile Navigation**: Instagram/Facebook-inspired bottom tab bar with recognizable icons, micro-labels, and intuitive visual cues before tapping.
-4. **Architectural Geometry**: Strict `rounded-sm` (4px max) for cards, dialogs, inputs, and layout containers. Never bloated or bubble-rounded.
-5. **Subtle Elevation**: Border-first design with `shadow-sm` at rest and `shadow-md` as the absolute hover maximum.
-6. **Snappy Micro-Interactions**: Universal `150ms ease-out` transitions. Fast, predictable, and native-feeling.
-7. **Clean Human-Friendly Code**: Modular, readable code blocks without unnecessary abstractions or AI-generated spaghetti.
+> **Core Philosophy:** *Clarity Over Clutter. Speed Over Spectacle. Utility Over Noise.*  
+> AmarBajar is NOT a generic lifestyle or fashion marketplace. It is a **hyperlocal everyday lifeline platform** for households to procure their daily essentials, emergency healthcare, and cooking fuel with absolute speed and zero cognitive friction.
 
 ---
 
-## 2. The 3-Color Visual Hierarchy (60-30-10 Proven Senior Rule)
+## 1. Platform Identity, Core Purpose & High-Level Goal
 
-Too many colors overwhelm the customer and dilute conversion rates. AmarBajar strictly enforces the **60-30-10 rule**:
+### 1.1 What is AmarBajar?
+AmarBajar is a **Hyperlocal Multi-Category E-Commerce & Delivery Platform** engineered specifically for the practical daily needs of Bangladeshi households.
+
+The platform provides 3 mission-critical service verticals:
+1. **Grocery & Household Essentials (প্রতিদিনের বাজার ও নিত্যপ্রয়োজনীয় পণ্য)**: Fresh vegetables (কাঁচা বাজার), fish (মাছ), meat (মাংস), cooking staples (চাল, ডাল, তেল, মশলা), frozen food, dairy, personal care, and essential kitchenware.
+2. **Medicine & Pharmacy (জরুরি ওষুধ ও ফার্মেসি)**: Prescription medications, OTC relief (fever, pain, gastric), first-aid kits, baby care essentials, and chronic disease maintenance drugs.
+3. **LP Gas Cylinder Delivery (এলপি গ্যাস সিলিন্ডার)**: Instant refill and new cylinder delivery across all major certified brands (Bashundhara, Omera, Beximco, BM, Jamuna, TotalGaz, etc.) with empty cylinder exchange at doorstep.
+
+### 1.2 Main High-Level Goal (মুল লক্ষ্য)
+* **Zero Visual Clutter:** No generic, bloated e-commerce banners, distracting countdown spam, or irrelevant fashion/electronics widgets.
+* **Minimum Clicks & Lightning Speed:** The user must be able to sit at home and effortlessly order their **daily grocery bazar (প্রতিদিনের বাজার)** and **emergency medicine (জরুরি ওষুধ)** together in the minimum possible time and taps.
+* **Instant LP Gas Lifeline:** When the kitchen gas runs out in the middle of cooking, the user can place an express LP Gas Cylinder order in under 30 seconds with clear empty cylinder exchange options.
+* **Hyperlocal Context & Bilingual Empathy:** Clear English UI backed by warm Bengali micro-cues (`প্রতিদিনের বাজার`, `জরুরি ওষুধ`, `গ্যাস সিলিন্ডার`, `খালি সিলিন্ডার বদল`) so every customer instantly understands what to do.
+
+---
+
+## 2. Core Order Logic: The Two-Track Fulfillment Architecture
+
+Because of the physical nature of goods and logistics, AmarBajar operates on a **strict Two-Track Fulfillment System**. All UI and cart interactions must respect this operational reality:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│  60% Base Canvas (White & Muted Slate)                                 │
+│                        AMARBAJAR ORDER LOGIC                           │
+├────────────────────────────────────────┬───────────────────────────────┤
+│    TRACK 1: COMBINED ORDER TRACK       │  TRACK 2: STANDALONE GAS TRACK│
+│    [ 🥦 Grocery ] + [ 💊 Medicine ]    │  [ 🛢️ LP Gas Cylinder ]       │
+├────────────────────────────────────────┼───────────────────────────────┤
+│ • Unified Cart: User adds fresh        │ • Independent Checkout: Never │
+│   vegetables, fish, cooking oil, and   │   mixed with grocery/medicine │
+│   paracetamol into the SAME cart.      │   due to vehicle & safety constraints│
+│ • One Delivery Fee / Consolidated Drop │ • Doorstep Empty Exchange:    │
+│ • Handled by lightweight delivery      │   Requires user to specify    │
+│   riders (bike/cycle bag).             │   empty cylinder brand to swap│
+│ • Standard doorstep dispatch.          │ • Heavy vehicle / van dispatch│
+└────────────────────────────────────────┴───────────────────────────────┘
+```
+
+### 2.1 Track 1: Combined Order (Grocery + Medicine)
+* **User Experience:** Shoppers can browse fresh bazar items and pharmacy products simultaneously and add them to a single unified shopping bag.
+* **Checkout Flow:** One address confirmation, one delivery slot selection, one combined invoice, and one consolidated delivery trip.
+* **Prescription Flow:** If prescription medicine is in the cart, a clean inline "Upload Prescription (প্রেসক্রিপশন আপলোড)" step appears before checkout completion.
+
+### 2.2 Track 2: Standalone Order (LP Gas Cylinder Express)
+* **Why Standalone?** LP Gas Cylinders weigh 20kg–30kg, involve heavy transport logistics (vans, pickups, or specialized cargo racks), and require a mandatory physical **"Empty Cylinder Exchange (খালি সিলিন্ডার বদল)"** protocol at the customer's doorstep.
+* **User Experience:**
+  - Selecting an LP Gas Cylinder presents an instant **"1-Click Direct Order / Express Checkout"** flow.
+  - The UI prompts two clear radio options:
+    1. **Refill / Exchange (রিফিল - খালি সিলিন্ডার আছে)**: Standard refill price with exchange of an existing empty cylinder.
+    2. **New Cylinder with Gas (নতুন প্যাকেজ - সিলিন্ডারসহ)**: Higher price for purchasing both cylinder body and gas.
+  - Gas orders are kept cleanly separated from the everyday grocery bag to prevent dispatch delays and rider confusion.
+
+---
+
+## 3. The 3 Core Service Verticals & UI Guidelines
+
+Every page layout, navigation bar, and feed must clearly orient the user into one of these 3 pillars:
+
+| Vertical | Bengali Title | Core Items Covered | Accent Cue | Delivery SLA |
+|---|---|---|:---:|:---:|
+| **1. Grocery Bazar** | প্রতিদিনের বাজার ও নিত্যপণ্য | Fresh veggies, fish, meat, rice, lentils, oil, spices, dairy, frozen foods, cleaning & kitchenware. | `#059669` (Emerald) | 30–60 mins |
+| **2. Pharmacy** | জরুরি ওষুধ ও হেলথকেয়ার | Prescription medicines, OTC fever/pain relief, gastric care, diabetic care, baby foods, antiseptics. | `#0284C7` (Sky Blue) | 30–45 mins |
+| **3. LP Gas** | এলপি গ্যাস সিলিন্ডার | 12kg, 25kg, 35kg cylinders (Bashundhara, Omera, Beximco, BM, Jamuna, TotalGaz). Refill & new package. | `#EA580C` (Flame Orange) | Express (within 30 mins) |
+
+---
+
+## 4. Visual Hierarchy & 3-Color Senior Rule (60-30-10)
+
+AmarBajar strictly forbids chaotic rainbow palettes. The platform is designed like an ultra-reliable utility tool (such as Linear, Instacart, or Apple Maps):
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│  60% Base Canvas (Clean White & Slate-50)                              │
 │  ┌──────────────────────────────────────────────────────────────────┐  │
 │  │  30% Structural Elements & Typography (Slate 900 & Slate 700)    │  │
 │  │  ┌────────────────────────────────────────────────────────────┐  │  │
 │  │  │  10% Brand Action Accent (Emerald #059669)                 │  │  │
-│  │  │  [ CTAs • Active Tabs • Cart Counters • Key Badges ]       │  │  │
+│  │  │  [ CTAs • Active Navigation • Cart Badges • Key Buttons ]  │  │  │
 │  │  └────────────────────────────────────────────────────────────┘  │  │
 │  └──────────────────────────────────────────────────────────────────┘  │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 2.1 The Tri-Color Breakdown
-
-| Proportion | Role | Hex Value | Tailwind Class | Usage Scope |
-|:---:|---|---|---|---|
-| **60%** | **Dominant Base** | `#FFFFFF` / `#F8FAFC` | `bg-white`, `bg-slate-50` | Main canvas background, product card backdrop, clean breathing space. |
-| **30%** | **Structural Neutral** | `#0F172A` / `#334155` | `text-slate-900`, `text-slate-700`, `border-slate-200` | Headings, readable body text, structural borders, dividers, dark accents. |
-| **10%** | **Brand Accent** | `#059669` (Hover: `#047857`) | `bg-emerald-600`, `text-emerald-600`, `border-emerald-600` | Primary buttons (Add to Cart, Buy Now), active bottom navigation icons, badge pills, focus rings. |
-
-### 2.2 Semantic Feedback (Subdued & Controlled)
-
-Alerts and validation states must **never** disrupt the primary 3-color hierarchy. They are used strictly for inline feedback:
-- **Destructive/Error**: `#DC2626` (`text-red-600`, `bg-red-50`, `border-red-200`) — out of stock, price cut highlights, error toasts.
-- **Success/Verified**: `#16A34A` (`text-green-600`, `bg-green-50`) — order confirmed, stock available.
-- **Warning**: `#D97706` (`text-amber-600`, `bg-amber-50`) — limited quantity remaining.
+### 4.1 Strict Color Tokens
+* **60% Dominant Canvas:** `#FFFFFF` (pure white background, card backdrops) and `#F8FAFC` (`bg-slate-50` for secondary utility sections).
+* **30% Structural Neutrals:** `#0F172A` (`text-slate-900` for bold titles), `#334155` (`text-slate-700` for crisp body text), and `#E2E8F0` (`border-slate-200` for 1px structural framing).
+* **10% Brand Accent:** `#059669` (Emerald-600) for primary actions, active tab highlights, and checkout triggers.
+* **Controlled Vertical Micro-Pills (Subdued Only):**
+  - Pharmacy pill tag: `#0284C7` / `bg-sky-50 text-sky-700 border-sky-200`
+  - LP Gas pill tag: `#EA580C` / `bg-orange-50 text-orange-700 border-orange-200`
+  - Grocery pill tag: `#059669` / `bg-emerald-50 text-emerald-700 border-emerald-200`
 
 ---
 
-## 3. Shapes & Border Radius Constraints
+## 5. Mobile-First Layout & Hyperlocal Navigation Architecture
 
-> [!IMPORTANT]
-> **Strict Rule: `rounded-sm` (4px max) for all cards, panels, inputs, and layout blocks.**  
-> Do not use `rounded-xl`, `rounded-2xl`, or `rounded-3xl` for layout cards. AmarBajar maintains a clean, crisp, editorial silhouette.
-
-| Element Type | Allowed Radius Token | Tailwind Class | Notes |
-|---|---|---|---|
-| **Product Cards & Panels** | `sm` (4px) | `rounded-sm` | Crisp, clean card frame. |
-| **Buttons & Inputs** | `sm` (4px) | `rounded-sm` | Professional, precise touch surfaces. |
-| **Modals & Dialogs** | `sm` (4px) | `rounded-sm` | Architectural sheet appearance. |
-| **Banners & Promo Tiles** | `sm` (4px) | `rounded-sm` | Uniform grid alignment. |
-| **Badges & Dot Counters** | `pill` / `full` | `rounded-full` | Reserved exclusively for notification dots, cart count pills, and circular avatar photos. |
-
----
-
-## 4. Elevation, Shadows & Border-First Styling
-
-AmarBajar avoids heavy, dark drop-shadows. Depth is created primarily through **subtle 1px borders**, complemented by faint elevation:
-
-- **Resting State**: `border border-slate-200/80` with optional `shadow-sm`.
-- **Hover State (Max Allowed)**: `hover:shadow-md` and `hover:border-slate-300`.
-- **Transitions**: Every hover shadow change **must** use `transition-all duration-150 ease-out`.
-
-```css
-/* Card Elevation Pattern */
-.ab-card {
-  @apply bg-white border border-slate-200/80 rounded-sm shadow-sm;
-  @apply transition-all duration-150 ease-out;
-}
-
-.ab-card:hover {
-  @apply border-slate-300 shadow-md;
-}
-```
-
----
-
-## 5. Mobile-First Layout & Dual Navigation Architecture
-
-AmarBajar treats mobile as the primary storefront. All features must be fully functional and ergonomically sound with single-thumb reach.
+75%+ of daily household shopping in Bangladesh is completed on smartphones by homemakers and busy professionals. The navigation must feel like a native app.
 
 ```
 MOBILE VIEW (< 768px)
 ┌──────────────────────────────────────────────┐
-│ [Logo: AmarBajar]        [Search] [Cart (2)] │  <- Sticky Top Bar (h-14)
+│ [📍 Dhanmondi, Dhaka ▾]  [🔍 Search] [🛍️ (3)] │  <- Hyperlocal Top Bar (h-14)
+├──────────────────────────────────────────────┤
+│ [ 🥦 কাঁচাবাজার ]  [ 💊 জরুরি ওষুধ ]  [ 🛢️ গ্যাস ]   │  <- 3-Vertical Quick Rail
 ├──────────────────────────────────────────────┤
 │                                              │
-│               Main Content                   │
-│          (Scrollable Feed / Grid)            │
+│             Daily Essentials Feed            │
+│         (Veggies, Fish, Medicine, Gas)       │
 │                                              │
 ├──────────────────────────────────────────────┤
-│  [🏠 Home] [📁 Categories] [🛍️ Bag(2)] [👤]  │  <- Sticky Bottom Bar (h-16, fixed)
+│ [🏠 Home] [🥦 Bazar] [💊 Meds] [🛢️ Gas] [👤]  │  <- Sticky Bottom Bar (h-16, fixed)
 └──────────────────────────────────────────────┘
-
-DESKTOP VIEW (≥ 768px)
-┌────────────────────────────────────────────────────────────────────────┐
-│ [Logo: AmarBajar]  [🔍 Search all products...]  [Categories] [Cart] [Profile] │  <- Unified Desktop Nav
-└────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 5.1 Mobile Sticky Top Bar (`h-14`)
-- **Left**: Compact Brand Logo (`AmarBajar` in `font-bold text-slate-900 tracking-tight`).
-- **Right**: Search trigger icon (`LuSearch`) and Cart counter pill (`LuShoppingBag` with 10% accent counter).
-- **Styling**: `sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 flex items-center justify-between`.
+### 5.1 Hyperlocal Header Components
+1. **Area / Location Selector:** Prominently placed at the top (e.g. `📍 Mirpur-10, Dhaka ▾` or `📍 Dhanmondi 27 ▾`) so customers always know delivery availability and delivery time for their specific neighborhood.
+2. **Unified Search with Category Filter:** Search bar capable of instant matching:
+   - Grocery: "আলু", "রুই মাছ", "Soyabean Oil", "Eggs"
+   - Medicine: "Napa Extra", "Seclo 20", "Paracetamol", "Savlon"
+   - LP Gas: "Bashundhara Gas", "12kg Refill", "Omera LP Gas"
+3. **Two-Track Cart Visual Indicator:**
+   - Standard Cart Bag: Shows item count for Grocery + Medicine combined.
+   - Active LP Gas Order Tracker (when a gas cylinder order is active): Floating pill showing cylinder dispatch status.
 
-### 5.2 Mobile Social-Style Sticky Bottom Navigation (`h-16`)
-Inspired by Facebook and Instagram tab bars, this bar provides persistent navigation with clear visual context before clicking.
-
-#### The 5 Core Tabs:
-1. **Home** (`RiHome5Line` / `RiHome5Fill`) — Discover feed, featured deals, banners.
-2. **Categories** (`RiApps2Line` / `RiApps2Fill`) — Browse departments and filtered collections.
-3. **Cart / Bag** (`RiShoppingBag3Line` / `RiShoppingBag3Fill`) — Live numeric badge indicating item count.
-4. **Wishlist / Saved** (`RiHeart3Line` / `RiHeart3Fill`) — Saved items for later purchase.
-5. **Account** (`RiUser3Line` / `RiUser3Fill`) — Profile, order tracking, settings.
-
-#### Tab Visual Feedback Rules:
-- **Dual-State Icons**: Outline icon for inactive state; Solid/Filled icon for active state.
-- **Micro-Labels**: 10px uppercase or medium text underneath (`text-[10px] font-medium tracking-wide`).
-- **Active State Indicator**: Icon and label transition to `#059669` (`text-emerald-600`) with a subtle active dot or bar above the icon.
-- **Inactive State**: Slate-500 (`text-slate-500 hover:text-slate-800`).
-- **Touch Target**: Minimum `44px x 44px` clickable area for comfortable thumb navigation.
-- **Safe Area**: Uses `pb-safe` to ensure full clearance on iOS Home Indicator.
-
-### 5.3 Desktop Navigation (`≥ 768px`)
-- The mobile bottom bar is hidden (`hidden md:block`).
-- Top navbar expands into a full desktop navigation bar:
-  - Global search bar with autocomplete suggestions (`w-full max-w-md`).
-  - Categorized quick links.
-  - Cart drawer trigger with hover price preview.
-  - User authentication menu.
+### 5.2 Mobile Social-Style Sticky Bottom Bar (`h-16`)
+The bottom navigation bar has 5 thumb-friendly tabs:
+1. **Home (`RiHome5Line` / `RiHome5Fill`)**: Hyperlocal daily hub, quick vertical jump cards, featured daily deals.
+2. **Bazar (`RiStore2Line` / `RiStore2Fill`)**: Dedicated grocery, fresh vegetables, fish, meat, cooking oil, spices.
+3. **Pharmacy (`RiHeartPulseLine` / `RiHeartPulseFill`)**: Quick medicine search, OTC categories, prescription upload.
+4. **LP Gas (`RiFireLine` / `RiFireFill`)**: 1-click gas cylinder refill & new booking with empty cylinder exchange options.
+5. **Account / Orders (`RiUser3Line` / `RiUser3Fill`)**: Live order tracking, order history, saved addresses.
 
 ---
 
-## 6. Typography Scale & Geometric Hierarchy
+## 6. Shapes, Geometry & Elevation Rules
 
-AmarBajar relies on a clean, modern geometric sans-serif font stack (**Inter** or high-performance `system-ui`).
+> [!IMPORTANT]
+> **Strict Rule: `rounded-sm` (4px max) across cards, inputs, buttons, and layout panels.**  
+> Never use bubble-rounded `rounded-xl`, `rounded-2xl`, or `rounded-3xl` for layout frames. AmarBajar maintains an architectural, precision-engineered silhouette.
 
-### 6.1 Font Weight Rules
-- **700 (Bold)**: Primary page titles, prominent product prices (`$49.00`).
-- **600 (SemiBold)**: Card titles, section headings, active tab labels, button text.
-- **500 (Medium)**: Input labels, secondary metadata, table headers.
-- **400 (Regular)**: Body copy, product descriptions, secondary disclaimers.
-
-### 6.2 Typography Tokens
-
-| Token | Size | Line Height | Tailwind Class | Primary Application |
-|---|:---:|:---:|---|---|
-| `micro` | 10px | 14px | `text-[10px]` | Bottom navigation labels, timestamp micro-tags. |
-| `caption` | 12px | 16px | `text-xs` | Badge labels, secondary ratings, helper text. |
-| `body2` | 14px | 20px | `text-sm` | Product titles in mobile grid, form labels, filters. |
-| `body1` | 16px | 24px | `text-base` | Desktop product titles, descriptions, standard inputs. |
-| `subtitle`| 18px | 28px | `text-lg` | Product prices, card group headers. |
-| `heading3`| 20px | 28px | `text-xl` | Carousel section headers, drawer titles. |
-| `heading2`| 24px | 32px | `text-2xl` | Category landing headers, modal headings. |
-| `heading1`| 30px | 36px | `text-3xl` | Hero banners, checkout titles. |
+| Element | Radius | Tailwind Class | Notes |
+|---|---|---|---|
+| **Product & Service Cards** | 4px | `rounded-sm` | Crisp, editorial border-first card. |
+| **Buttons & Search Inputs** | 4px | `rounded-sm` | Professional, high-accuracy touch surface. |
+| **Prescription Upload Dropzone** | 4px | `rounded-sm` | Dashed border utility box. |
+| **Gas Exchange Radio Panels** | 4px | `rounded-sm` | Structured option selector. |
+| **Notification & Counter Badges** | Pill | `rounded-full` | Numeric badges only (`cartCount`, status dot). |
 
 ---
 
-## 7. Spacing & Geometric Grid System (8-Point Grid)
+## 7. Component Specifications for the 3 Verticals
 
-To make layouts feel calm and exceptionally organized, all spacing derives from an **8px base unit** (with a 4px micro-increment):
+### 7.1 Grocery Product Card (`BazarCard`)
+- **Visuals:** High-contrast fresh product photography/illustration on neutral `#F8FAFC`.
+- **Badges:** Freshness tag (`আজকের তাজা`, `অর্গানিক`), unit spec (`১ কেজি`, `৫০০ গ্রাম`, `১ ডজন`).
+- **Action:** Quantity stepper (`- [ 1 ] +`) for instant multi-quantity additions without opening product page.
 
-```
-4px (micro) → 8px (tiny) → 12px (compact) → 16px (standard) → 24px (medium) → 32px (large) → 48px (xlarge) → 64px (section)
-```
+### 7.2 Medicine Card (`MedicineCard`)
+- **Visuals:** Clean packaging or generic strip illustration with manufacturer name (e.g. `Square Pharmaceuticals`, `Beximco Pharma`).
+- **Details:** Generic name in subtitle (`Paracetamol 500mg`, `Omeprazole 20mg`), unit packaging (`১০ টি ট্যাবলেট / পাতা`, `১০০ মি.লি. সিরাপ`).
+- **Prescription Notice:** Subdued pill tag (`প্রেসক্রিপশন আবশ্যক` or `OTC / প্রেসক্রিপশন ছাড়া`).
+- **Action:** Direct Add to the unified Grocery + Medicine Cart.
 
-### 7.1 Spacing Application Guide
-
-| Location | Mobile (< 768px) | Desktop (≥ 768px) | Tailwind Classes |
-|---|:---:|:---:|---|
-| **Outer Page Margin** | 16px | 32px - 48px | `px-4 md:px-8 lg:px-12` |
-| **Grid Gap (Products)** | 12px | 16px - 24px | `gap-3 md:gap-4 lg:gap-6` |
-| **Card Internal Padding**| 12px | 16px | `p-3 md:p-4` |
-| **Section Vertical Spacing** | 24px - 32px | 48px - 64px | `py-6 md:py-12` |
-| **Max Page Width** | 100% | 1280px | `max-w-7xl mx-auto` |
-
----
-
-## 8. Iconography Standard (Lucide & React Icons)
-
-This project integrates both **`lucide-react`** and **`react-icons`** to deliver crisp, recognizable visuals.
-
-### 8.1 Library Distribution Strategy
-- **`lucide-react`**: Use for core UI utility controls (chevrons, close `X`, search, filters, sliders, external links, plus/minus steppers).
-- **`react-icons` (Remix Icons `react-icons/ri` or Feather `react-icons/fi`)**: Use for:
-  - Dual-state bottom navigation icons (outline vs. filled states).
-  - Social login & sharing buttons (`RiFacebookFill`, `RiGoogleFill`, `RiInstagramLine`).
-  - Region-specific marketplace payment icons (bKash, Nagad, Visa, Mastercard).
-
-### 8.2 Icon Sizing Rules
-- **Micro**: `14px` (`size-3.5`) — inline with metadata tags and ratings.
-- **Button / Input**: `16px - 18px` (`size-4` / `size-[18px]`) — inside search bars and CTA buttons.
-- **Navigation**: `20px - 22px` (`size-5`) — in headers and bottom navigation tabs.
+### 7.3 LP Gas Booking Card (`GasCylinderCard`)
+- **Visuals:** Brand cylinder rendering (Bashundhara, Omera, Beximco, BM, TotalGaz) with net weight tag (`১২ কেজি`).
+- **Exchange Radio:** 
+  - Option A: **Refill with Exchange (খালি সিলিন্ডার দিয়ে রিফিল)** — Primary price (e.g. ৳1,450).
+  - Option B: **New Cylinder Package (নতুন সিলিন্ডারসহ)** — Full price (e.g. ৳3,650).
+- **Direct Action:** Standalone CTA button: **"Express Order Now (তাৎক্ষণিক অর্ডার)"** linking straight to Gas Express Checkout.
 
 ---
 
-## 9. Motion, Transitions & Micro-Interactions
+## 8. AI Agent Code Generation Guardrails
 
-> [!TIP]
-> **Performance Rule: Minimal, ultra-fast transitions.**  
-> Avoid slow animations or complex spring physics. We want the interface to feel instantaneous and buttery smooth.
+When modifying or generating code for AmarBajar, agents **must strictly follow these context rules**:
 
-- **Universal Timing**: `150ms` (`duration-150`).
-- **Universal Easing**: `ease-out`.
-- **Target Properties**: Only animate GPU-cheap properties: `opacity`, `transform`, `color`, `background-color`, `box-shadow`, `border-color`.
-- **Hover Micro-interaction Formula**:
-  ```tsx
-  className="transition-colors duration-150 ease-out hover:text-emerald-600"
-  ```
-
----
-
-## 10. Core Component Specifications
-
-### 10.1 Standard Product Card (`ProductCard`)
-- **Structure**:
-  1. Image Container: `aspect-square` or `aspect-[4/5]` with `overflow-hidden bg-slate-100 rounded-sm relative`.
-  2. Wishlist Button: Top-right floating circular button (`size-8 bg-white/90 hover:bg-white text-slate-700 shadow-sm rounded-full`).
-  3. Badge: Top-left discount or status badge (`bg-emerald-600 text-white text-[10px] font-semibold px-1.5 py-0.5 rounded-sm`).
-  4. Content:
-     - Category / Brand: `text-[11px] uppercase tracking-wider text-slate-500 font-medium`.
-     - Product Title: `text-sm font-medium text-slate-900 line-clamp-2 hover:text-emerald-600 transition-colors duration-150`.
-     - Price Section: Current price (`text-base font-bold text-slate-900`) + original strikethrough price (`text-xs text-slate-400 line-through`).
-  5. Action: Quick "Add" button with `150ms` color transition.
-
-### 10.2 Buttons (`Button`)
-Built on shadcn/ui with strict styling presets:
-- **Primary (10% Accent)**: `bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm rounded-sm px-4 py-2 transition-colors duration-150`.
-- **Secondary (Structural)**: `bg-slate-100 hover:bg-slate-200 text-slate-900 font-medium text-sm rounded-sm px-4 py-2 transition-colors duration-150`.
-- **Outline**: `border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-700 font-medium text-sm rounded-sm px-4 py-2 transition-colors duration-150`.
-- **Ghost**: `hover:bg-slate-100 text-slate-700 font-medium text-sm rounded-sm px-3 py-1.5 transition-colors duration-150`.
-
-### 10.3 Form Inputs (`Input`)
-- `h-10 px-3 py-2 bg-white border border-slate-200 rounded-sm text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-emerald-600 focus:border-emerald-600 transition-colors duration-150`.
-
----
-
-## 11. AI Agent Code Generation Guardrails
-
-When generating UI code for AmarBajar, AI agents and developers **must adhere to these human-friendly engineering rules**:
-
-1. **Keep Code Human-Readable**:
-   - Write clean, declarative components under 150 lines. Break complex screens into modular files (e.g. `ProductCard.tsx`, `MobileBottomNav.tsx`, `HeaderSearch.tsx`).
-   - Avoid generating massive nested ternaries or convoluted hooks.
-2. **Standard Tailwind Class Ordering**:
+1. **Keep the Context Relevant:**
+   - NEVER introduce fashion clothes, sneakers, random gadgets, or mechanical keyboards into the core UI.
+   - The platform is strictly **Grocery & Bazar**, **Medicine/Pharmacy**, and **LP Gas Cylinder Delivery**.
+2. **Respect the Two-Track Fulfillment Logic:**
+   - Never force an LP Gas cylinder into the standard grocery bag without explicit user-selected exchange options.
+   - Keep Grocery + Medicine combined in the main bag.
+3. **Clean Human-Readable Code:**
+   - Modular components under 150 lines (`Navbar.tsx`, `MobileBottomNav.tsx`, `GasBookingSection.tsx`, `BazarGrid.tsx`, `PharmacySection.tsx`).
+4. **Standard Tailwind Class Ordering:**
    - `[Layout & Display] -> [Sizing & Box Model] -> [Spacing] -> [Typography] -> [Borders & Backgrounds] -> [Effects & Transitions]`
-   - Example: `flex items-center justify-between w-full p-4 text-sm font-medium text-slate-900 bg-white border border-slate-200 rounded-sm shadow-sm transition-all duration-150 hover:shadow-md`
-3. **React Server Components (RSC) by Default**:
-   - Only add `'use client'` when state, event handlers, or browser APIs are genuinely required.
-4. **Accessible Touch Targets**:
-   - Ensure all clickable mobile elements have at least `44px x 44px` hit areas (`min-h-[44px] min-w-[44px]` or adequate padding).
-5. **Images**:
-   - Always use Next.js `<Image />` with defined `sizes`, `aspect-ratio`, and `alt` tags.
+5. **Universal Snappy Transitions:**
+   - Universal `150ms ease-out` timing (`transition-all duration-150 ease-out`).
 
 ---
 
-## 12. Do's and Don'ts Checklist
+## 9. Do's and Don'ts Checklist
 
 | ✅ DO | ❌ DON'T |
 |---|---|
-| Use the 60-30-10 color hierarchy strictly. | Don't introduce arbitrary accent colors (purple, orange, cyan) into the core UI. |
-| Use `rounded-sm` (4px max) for all cards and inputs. | Don't use `rounded-xl`, `rounded-2xl`, or `rounded-3xl` for layout containers. |
-| Use `shadow-sm` at rest and `shadow-md` max on hover. | Don't use heavy blurry shadows (`shadow-xl`, `shadow-2xl`). |
-| Keep transitions snappy at `150ms ease-out`. | Don't use slow (400ms+), bouncy, or distracting spring animations. |
-| Design mobile screens first with sticky bottom navigation. | Don't build desktop-only layouts that squeeze awkwardly onto mobile. |
-| Use dual-state icons (outline vs solid) with micro-labels. | Don't show unlabelled, mystery icons that confuse shoppers. |
-| Maintain an 8px geometric grid rhythm. | Don't mix random pixel margins (`mt-[13px]`, `p-[7px]`). |
-| Keep code blocks clean, modular, and human-friendly. | Don't output over-engineered, unmaintainable AI spaghetti code. |
+| Focus 100% on Grocery, Pharmacy, and LP Gas Cylinder Delivery. | Don't build generic Amazon/Daraz fashion, shoe, or electronics marketplaces. |
+| Support combined ordering for Grocery + Medicine in one unified cart. | Don't force users into separate carts for vegetables and medicines. |
+| Treat LP Gas Cylinder as a standalone express order with empty exchange flow. | Don't mix 30kg gas cylinders silently into a grocery basket without exchange logic. |
+| Use bilingual Bengali micro-cues (`প্রতিদিনের বাজার`, `জরুরি ওষুধ`, `গ্যাস সিলিন্ডার`). | Don't create culturally alien English-only boilerplate layouts. |
+| Use crisp `rounded-sm` (4px) and subtle 1px borders with 60-30-10 palette. | Don't use bubbly `rounded-2xl` cards or dark heavy drop shadows. |
+| Keep interactions fast at `150ms ease-out` with mobile thumb reach. | Don't use slow, bouncy 400ms animations. |
 
 ---
 
-*Document version: 2.0.0 — Updated for AmarBajar Modern Marketplace Architecture.*
+*Document version: 3.0.0 — Updated for AmarBajar Hyperlocal Multi-Category Platform (Grocery, Pharmacy & LP Gas Two-Track Architecture).*

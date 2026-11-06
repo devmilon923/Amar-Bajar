@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" fill="none">
+  <!-- Soft background plate -->
+  <rect width="240" height="240" rx="4" fill="#f8fafc"/>
+  
+  <!-- Shadow -->
+  <ellipse cx="120" cy="190" rx="50" ry="10" fill="#e2e8f0"/>
+  
+  <!-- Rice Jute/Woven Bag -->
+  <path d="M 80 85 C 80 75, 160 75, 160 85 L 168 180 C 168 188, 72 188, 72 180 Z" fill="#d97706" stroke="#b45309" stroke-width="2"/>
+  
+  <!-- Bag Texture Ribs -->
+  <path d="M 76 110 Q 120 115 164 110" stroke="#b45309" stroke-width="1.5" fill="none"/>
+  <path d="M 74 135 Q 120 140 166 135" stroke="#b45309" stroke-width="1.5" fill="none"/>
+  <path d="M 73 160 Q 120 165 167 160" stroke="#b45309" stroke-width="1.5" fill="none"/>
+
+  <!-- Bag Stitching top -->
+  <rect x="76" y="76" width="88" height="12" rx="3" fill="#fef3c7" stroke="#b45309" stroke-width="1.5"/>
+  <line x1="82" y1="82" x2="158" y2="82" stroke="#d97706" stroke-width="2" stroke-dasharray="4 2"/>
+
+  <!-- Center Label Patch -->
+  <rect x="90" y="112" width="60" height="42" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="120" y="128" font-family="'Noto Serif Bengali', system-ui, sans-serif" font-size="9" font-weight="700" fill="#047857" text-anchor="middle">মিনিকেট চাল</text>
+  <text x="120" y="142" font-family="'Noto Serif Bengali', system-ui, sans-serif" font-size="8" font-weight="600" fill="#64748b" text-anchor="middle">৫ কেজি ব্যাগ</text>
+  
+  <!-- Stamp -->
+  <rect x="70" y="204" width="100" height="20" rx="3" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="120" y="218" font-family="'Noto Serif Bengali', system-ui, sans-serif" font-size="10" font-weight="700" fill="#065f46" text-anchor="middle">প্রিমিয়াম মিনিকেট</text>
+</svg>

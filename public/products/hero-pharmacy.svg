@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280" fill="none">
+  <!-- Circular soft backdrop -->
+  <circle cx="140" cy="140" r="130" fill="#f0f9ff"/>
+  <ellipse cx="140" cy="225" rx="85" ry="16" fill="#e0f2fe"/>
+  
+  <!-- Prescription Clipboard Backing -->
+  <rect x="75" y="45" width="130" height="170" rx="6" fill="#ffffff" stroke="#bae6fd" stroke-width="2"/>
+  <rect x="110" y="38" width="60" height="15" rx="3" fill="#0284c7"/>
+  <circle cx="140" cy="45" r="3" fill="#ffffff"/>
+  
+  <!-- Rx Symbol & Medical Cross -->
+  <circle cx="102" cy="78" r="14" fill="#0284c7"/>
+  <path d="M 102 70 L 102 86 M 94 78 L 110 78" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <text x="145" y="83" font-family="system-ui, sans-serif" font-size="16" font-weight="900" fill="#0284c7">Rx Pharmacy</text>
+
+  <!-- Prescription Note Lines -->
+  <line x1="90" y1="105" x2="190" y2="105" stroke="#e2e8f0" stroke-width="2"/>
+  <line x1="90" y1="120" x2="170" y2="120" stroke="#e2e8f0" stroke-width="2"/>
+  <line x1="90" y1="135" x2="185" y2="135" stroke="#e2e8f0" stroke-width="2"/>
+
+  <!-- Medicine Blister Pack Overlay (Left) -->
+  <g transform="rotate(-8 90 170)">
+    <rect x="50" y="130" width="75" height="65" rx="4" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+    <rect x="50" y="130" width="75" height="16" rx="2" fill="#ef4444"/>
+    <text x="87" y="142" font-family="system-ui, sans-serif" font-size="8" font-weight="800" fill="#ffffff" text-anchor="middle">Napa Extra</text>
+    <circle cx="65" cy="160" r="6" fill="#f1f5f9" stroke="#cbd5e1"/>
+    <circle cx="85" cy="160" r="6" fill="#f1f5f9" stroke="#cbd5e1"/>
+    <circle cx="105" cy="160" r="6" fill="#f1f5f9" stroke="#cbd5e1"/>
+    <circle cx="75" cy="180" r="6" fill="#f1f5f9" stroke="#cbd5e1"/>
+    <circle cx="95" cy="180" r="6" fill="#f1f5f9" stroke="#cbd5e1"/>
+  </g>
+
+  <!-- Syrup Bottle Overlay (Right) -->
+  <g transform="rotate(6 185 165)">
+    <rect x="160" y="125" width="45" height="75" rx="6" fill="#f59e0b" stroke="#d97706" stroke-width="1.5"/>
+    <rect x="172" y="112" width="20" height="14" rx="2" fill="#0284c7"/>
+    <rect x="164" y="145" width="37" height="40" rx="2" fill="#ffffff"/>
+    <text x="182" y="162" font-family="system-ui, sans-serif" font-size="7" font-weight="800" fill="#0284c7" text-anchor="middle">Savlon</text>
+    <text x="182" y="174" font-family="'Noto Serif Bengali', system-ui, sans-serif" font-size="6.5" font-weight="700" fill="#64748b" text-anchor="middle">সিরাপ</text>
+  </g>
+
+  <!-- Capsule (Floating front) -->
+  <g transform="rotate(35 140 190)">
+    <rect x="125" y="180" width="30" height="14" rx="7" fill="#0284c7"/>
+    <path d="M 140 180 L 148 180 A 7 7 0 0 1 155 187 A 7 7 0 0 1 148 194 L 140 194 Z" fill="#ef4444"/>
+  </g>
+
+  <!-- Badge -->
+  <rect x="70" y="232" width="140" height="24" rx="4" fill="#0284c7"/>
+  <text x="140" y="248" font-family="'Noto Serif Bengali', system-ui, sans-serif" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">১০০% আসল ওষুধ</text>
+</svg>

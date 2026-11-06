@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" fill="none">
+  <rect width="240" height="240" rx="4" fill="#f8fafc"/>
+  <ellipse cx="120" cy="200" rx="45" ry="10" fill="#e2e8f0"/>
+  <path d="M 90 60 C 90 40, 150 40, 150 60 L 150 75 L 90 75 Z" fill="#9f1239" stroke="#881337" stroke-width="2"/>
+  <rect x="105" y="48" width="30" height="12" rx="4" fill="#f8fafc"/>
+  <rect x="114" y="62" width="12" height="15" fill="#f59e0b" stroke="#d97706" stroke-width="1.5"/>
+  <rect x="112" y="58" width="16" height="6" rx="2" fill="#ef4444"/>
+  <rect x="80" y="75" width="80" height="110" rx="14" fill="url(#jamunaGrad)" stroke="#881337" stroke-width="2"/>
+  <defs>
+    <linearGradient id="jamunaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#be123c"/>
+      <stop offset="30%" stop-color="#e11d48"/>
+      <stop offset="70%" stop-color="#be123c"/>
+      <stop offset="100%" stop-color="#881337"/>
+    </linearGradient>
+  </defs>
+  <line x1="80" y1="130" x2="160" y2="130" stroke="#700e2b" stroke-width="1.5"/>
+  <rect x="90" y="94" width="60" height="28" rx="3" fill="#ffffff"/>
+  <text x="120" y="108" font-family="'Noto Serif Bengali', system-ui, sans-serif" font-size="11" font-weight="900" fill="#9f1239" text-anchor="middle">যমুনা</text>
+  <text x="120" y="118" font-family="system-ui, sans-serif" font-size="8" font-weight="800" fill="#334155" text-anchor="middle">12 KG GAS</text>
+  <text x="120" y="152" font-family="'Noto Serif Bengali', system-ui, sans-serif" font-size="10" font-weight="800" fill="#ffffff" text-anchor="middle">যমুনা এলপিজি</text>
+  <text x="120" y="165" font-family="system-ui, sans-serif" font-size="7.5" font-weight="700" fill="#ffe4e6" text-anchor="middle">JAMUNA LP GAS</text>
+  <rect x="86" y="182" width="68" height="14" rx="3" fill="#881337" stroke="#4c0519" stroke-width="1.5"/>
+  <rect x="70" y="210" width="100" height="20" rx="3" fill="#fff1f2" stroke="#fecdd3" stroke-width="1"/>
+  <text x="120" y="224" font-family="'Noto Serif Bengali', system-ui, sans-serif" font-size="10" font-weight="700" fill="#9f1239" text-anchor="middle">যমুনা ১২ কেজি</text>
+</svg>

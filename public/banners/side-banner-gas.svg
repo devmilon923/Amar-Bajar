@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 180" fill="none">
+  <defs>
+    <linearGradient id="sideGasGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9a3412"/>
+      <stop offset="100%" stop-color="#c2410c"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="380" height="180" rx="4" fill="url(#sideGasGrad)"/>
+  
+  <g transform="translate(24, 22)">
+    <rect width="130" height="22" rx="3" fill="#ffedd5"/>
+    <text x="65" y="15" fill="#9a3412" font-family="system-ui, sans-serif" font-size="10" font-weight="800" text-anchor="middle">
+      🔥 এক্সপ্রেস গ্যাস সার্ভিস
+    </text>
+
+    <text x="0" y="55" fill="#ffffff" font-family="system-ui, sans-serif" font-size="18" font-weight="800">
+      ১২ কেজি সিলিন্ডার রিফিল
+    </text>
+    <text x="0" y="76" fill="#fed7aa" font-family="system-ui, sans-serif" font-size="12" font-weight="600">
+      খালি সিলিন্ডার দিয়ে তাৎক্ষণিক রিফিল
+    </text>
+
+    <text x="0" y="105" fill="#ffffff" font-family="system-ui, sans-serif" font-size="20" font-weight="800">
+      ৳১,৪৫০ <tspan font-size="11" fill="#fed7aa" font-weight="500">থেকে শুরু</tspan>
+    </text>
+
+    <rect y="118" width="115" height="30" rx="3" fill="#f97316"/>
+    <text x="57" y="137" fill="#ffffff" font-family="system-ui, sans-serif" font-size="12" font-weight="700" text-anchor="middle">
+      বুক করুন →
+    </text>
+  </g>
+
+  <!-- Cylinder icon graphic -->
+  <g transform="translate(250, 15)">
+    <rect x="25" y="20" width="55" height="10" rx="2" fill="#fdba74"/>
+    <path d="M 18 35 C 18 28 88 28 88 35 L 88 120 C 88 130 18 130 18 120 Z" fill="#7c2d12" stroke="#ea580c" stroke-width="2"/>
+    <rect x="28" y="58" width="50" height="22" rx="3" fill="#ea580c"/>
+    <text x="53" y="73" fill="#ffffff" font-family="system-ui, sans-serif" font-size="10" font-weight="800" text-anchor="middle">
+      GAS
+    </text>
+
+    <rect x="0" y="135" width="105" height="18" rx="3" fill="rgba(0,0,0,0.35)"/>
+    <text x="52" y="147" fill="#ffedd5" font-family="monospace" font-size="9" text-anchor="middle">
+      IMAGE: 380x180
+    </text>
+  </g>
+</svg>

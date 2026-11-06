@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" fill="none">
+  <!-- Soft background plate -->
+  <rect width="240" height="240" rx="4" fill="#f8fafc"/>
+  
+  <!-- Box Shadow -->
+  <rect x="52" y="62" width="136" height="116" rx="4" fill="#e2e8f0"/>
+  
+  <!-- Box Body -->
+  <rect x="50" y="60" width="140" height="120" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  
+  <!-- Gold Sunburst Header -->
+  <rect x="50" y="60" width="140" height="32" rx="2" fill="#ea580c"/>
+  <circle cx="75" cy="76" r="8" fill="#fde047"/>
+  <text x="125" y="81" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle">D-Rise 40000</text>
+  
+  <!-- Incepta Sub-brand -->
+  <text x="120" y="105" font-family="system-ui, sans-serif" font-size="8" font-weight="700" fill="#64748b" text-anchor="middle">Incepta Pharmaceuticals</text>
+  <text x="120" y="117" font-family="system-ui, sans-serif" font-size="7.5" font-weight="500" fill="#94a3b8" text-anchor="middle">Cholecalciferol (Vitamin D3)</text>
+
+  <!-- 4 Softgel Capsules -->
+  <g fill="#f59e0b" stroke="#d97706" stroke-width="1.5">
+    <ellipse cx="80" cy="145" rx="10" ry="14"/>
+    <ellipse cx="106" cy="145" rx="10" ry="14"/>
+    <ellipse cx="134" cy="145" rx="10" ry="14"/>
+    <ellipse cx="160" cy="145" rx="10" ry="14"/>
+  </g>
+  <g fill="#fef08a" opacity="0.6">
+    <ellipse cx="78" cy="142" rx="3" ry="5"/>
+    <ellipse cx="104" cy="142" rx="3" ry="5"/>
+    <ellipse cx="132" cy="142" rx="3" ry="5"/>
+    <ellipse cx="158" cy="142" rx="3" ry="5"/>
+  </g>
+
+  <!-- Prescription Only Tag -->
+  <rect x="70" y="202" width="100" height="20" rx="3" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="120" y="216" font-family="'Noto Serif Bengali', system-ui, sans-serif" font-size="10" font-weight="700" fill="#dc2626" text-anchor="middle">৪টি ক্যাপসুল • ইনসেপ্টা</text>
+</svg>

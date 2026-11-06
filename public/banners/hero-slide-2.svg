@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 380" fill="none">
+  <defs>
+    <linearGradient id="pharmaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#075985"/>
+      <stop offset="50%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+    <pattern id="crossPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 20 15 L 20 25 M 15 20 L 25 20" stroke="rgba(255,255,255,0.06)" stroke-width="2"/>
+    </pattern>
+  </defs>
+
+  <rect width="840" height="380" rx="4" fill="url(#pharmaGrad)"/>
+  <rect width="840" height="380" rx="4" fill="url(#crossPattern)"/>
+
+  <!-- Left Content -->
+  <g transform="translate(48, 48)">
+    <rect width="210" height="28" rx="4" fill="#e0f2fe"/>
+    <text x="105" y="18" fill="#0369a1" font-family="system-ui, sans-serif" font-size="12" font-weight="700" text-anchor="middle">
+      💊 জরুরি ওষুধ ও ডিজিটাল ফার্মেসি
+    </text>
+
+    <text x="0" y="80" fill="#ffffff" font-family="system-ui, sans-serif" font-size="34" font-weight="800">
+      ১০০% জেনুইন প্রেসক্রিপশন মেডিসিন
+    </text>
+    <text x="0" y="125" fill="#bae6fd" font-family="system-ui, sans-serif" font-size="28" font-weight="700">
+      দরজায় পৌঁছাবে ৩০ মিনিটে!
+    </text>
+
+    <text x="0" y="170" fill="#e0f2fe" font-family="system-ui, sans-serif" font-size="15" font-weight="500">
+      গ্রোসারির সাথেই একই কার্টে যুক্ত করুন অথবা প্রেসক্রিপশন ছবি আপলোড করুন
+    </text>
+
+    <rect y="195" width="250" height="36" rx="4" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+    <text x="125" y="218" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700" text-anchor="middle">
+      A-Grade ফার্মাসিস্ট দ্বারা ভেরিফাইড ওষুধ
+    </text>
+
+    <rect y="248" width="180" height="42" rx="4" fill="#38bdf8"/>
+    <text x="90" y="274" fill="#0c4a6e" font-family="system-ui, sans-serif" font-size="14" font-weight="800" text-anchor="middle">
+      প্রেসক্রিপশন আপলোড →
+    </text>
+  </g>
+
+  <!-- Right Visual -->
+  <g transform="translate(560, 40)">
+    <circle cx="130" cy="150" r="120" fill="rgba(255,255,255,0.08)"/>
+    <!-- Medical Cross & Capsule Graphic -->
+    <rect x="90" y="80" width="80" height="80" rx="16" fill="#ffffff"/>
+    <rect x="120" y="95" width="20" height="50" rx="3" fill="#0284c7"/>
+    <rect x="105" y="110" width="50" height="20" rx="3" fill="#0284c7"/>
+    <!-- Pill -->
+    <rect x="60" y="175" width="85" height="34" rx="17" fill="#ef4444" transform="rotate(-25 60 175)"/>
+    <rect x="60" y="175" width="42.5" height="34" rx="4" fill="#ffffff" transform="rotate(-25 60 175)"/>
+
+    <rect x="50" y="250" width="160" height="24" rx="4" fill="rgba(0,0,0,0.3)"/>
+    <text x="130" y="266" fill="#e0f2fe" font-family="monospace" font-size="11" text-anchor="middle">
+      BANNER: 840 x 380 px
+    </text>
+  </g>
+</svg>

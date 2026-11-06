@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280" fill="none">
+  <!-- Circular soft backdrop -->
+  <circle cx="140" cy="140" r="130" fill="#ecfdf5"/>
+  <ellipse cx="140" cy="225" rx="85" ry="16" fill="#d1fae5"/>
+  
+  <!-- Jute Basket Body -->
+  <path d="M 60 150 C 60 215, 220 215, 220 150 L 230 135 C 230 130, 50 130, 50 135 Z" fill="#d97706" stroke="#b45309" stroke-width="2.5"/>
+  <line x1="55" y1="140" x2="225" y2="140" stroke="#b45309" stroke-width="2"/>
+  <path d="M 75 140 C 90 190, 190 190, 205 140" stroke="#b45309" stroke-width="2" fill="none"/>
+  <path d="M 100 140 C 110 200, 170 200, 180 140" stroke="#b45309" stroke-width="2" fill="none"/>
+
+  <!-- Rui Fish Head sticking out left -->
+  <path d="M 50 120 C 65 95, 100 95, 115 125 Z" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+  <circle cx="68" cy="115" r="4" fill="#0f172a"/>
+
+  <!-- Fresh Cauliflower / Cabbage Center -->
+  <circle cx="140" cy="110" r="32" fill="#22c55e"/>
+  <circle cx="130" cy="105" r="14" fill="#f8fafc"/>
+  <circle cx="145" cy="100" r="12" fill="#f8fafc"/>
+  <circle cx="140" cy="118" r="14" fill="#f8fafc"/>
+
+  <!-- Red Tomatoes -->
+  <circle cx="105" cy="135" r="18" fill="#ef4444" stroke="#dc2626" stroke-width="1.5"/>
+  <path d="M 105 117 C 103 114, 107 114, 105 117" stroke="#15803d" stroke-width="3"/>
+  <circle cx="175" cy="132" r="20" fill="#ef4444" stroke="#dc2626" stroke-width="1.5"/>
+  <path d="M 175 112 C 173 109, 177 109, 175 112" stroke="#15803d" stroke-width="3"/>
+
+  <!-- Carrots -->
+  <polygon points="185,120 220,70 228,76 195,125" fill="#f97316" stroke="#ea580c" stroke-width="1.5"/>
+  <path d="M 224 73 L 236 60 M 224 73 L 240 68" stroke="#16a34a" stroke-width="2"/>
+
+  <!-- Bottle of Mustard/Soyabean Oil -->
+  <rect x="75" y="65" width="28" height="50" rx="4" fill="#facc15" stroke="#eab308" stroke-width="2"/>
+  <rect x="83" y="55" width="12" height="10" fill="#ef4444"/>
+
+  <!-- Fresh Badge Floating -->
+  <rect x="80" y="232" width="120" height="24" rx="4" fill="#059669"/>
+  <text x="140" y="248" font-family="'Noto Serif Bengali', system-ui, sans-serif" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">তাজা কাঁচাবাজার</text>
+</svg>

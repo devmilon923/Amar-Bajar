@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280" fill="none">
+  <!-- Circular soft backdrop -->
+  <circle cx="140" cy="140" r="130" fill="#fff7ed"/>
+  <ellipse cx="140" cy="225" rx="85" ry="16" fill="#fed7aa"/>
+  
+  <!-- Cylinder Shadow -->
+  <ellipse cx="140" cy="210" rx="50" ry="12" fill="#fdba74"/>
+
+  <!-- Top Handle Shroud -->
+  <path d="M 105 55 C 105 32, 175 32, 175 55 L 175 75 L 105 75 Z" fill="#c2410c" stroke="#9a3412" stroke-width="2.5"/>
+  <rect x="122" y="42" width="36" height="15" rx="5" fill="#fff7ed"/>
+
+  <!-- Brass Valve & Seal -->
+  <rect x="133" y="60" width="14" height="18" fill="#f59e0b" stroke="#d97706" stroke-width="2"/>
+  <rect x="130" y="55" width="20" height="7" rx="2" fill="#ef4444"/>
+
+  <!-- Main Cylinder Body (Flame Orange / Red) -->
+  <rect x="95" y="75" width="90" height="120" rx="16" fill="url(#heroGasGrad)" stroke="#c2410c" stroke-width="2.5"/>
+  <defs>
+    <linearGradient id="heroGasGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ea580c"/>
+      <stop offset="25%" stop-color="#fb923c"/>
+      <stop offset="70%" stop-color="#ea580c"/>
+      <stop offset="100%" stop-color="#9a3412"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Weld Seam line -->
+  <line x1="95" y1="135" x2="185" y2="135" stroke="#9a3412" stroke-width="2"/>
+
+  <!-- Brand Plate -->
+  <rect x="110" y="98" width="60" height="28" rx="4" fill="#ffffff" opacity="0.95"/>
+  <text x="140" y="117" font-family="system-ui, sans-serif" font-size="14" font-weight="900" fill="#c2410c" text-anchor="middle">12 KG</text>
+  
+  <text x="140" y="160" font-family="'Noto Serif Bengali', system-ui, sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">এলপি গ্যাস সিলিন্ডার</text>
+  <text x="140" y="174" font-family="system-ui, sans-serif" font-size="9" font-weight="700" fill="#ffedd5" text-anchor="middle">EXPRESS REFILL 30 MIN</text>
+
+  <!-- Bottom Foot Ring -->
+  <rect x="102" y="192" width="76" height="16" rx="4" fill="#7c2d12" stroke="#9a3412" stroke-width="2"/>
+
+  <!-- Safety Seal / Digital Scale Tag -->
+  <rect x="70" y="232" width="140" height="24" rx="4" fill="#ea580c"/>
+  <text x="140" y="248" font-family="'Noto Serif Bengali', system-ui, sans-serif" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">ওজন মেপে দরজায় রিফিল</text>
+</svg>

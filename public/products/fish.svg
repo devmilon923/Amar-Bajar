@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" fill="none">
+  <!-- Soft background plate -->
+  <rect width="240" height="240" rx="4" fill="#f8fafc"/>
+  
+  <!-- Fish Shadow -->
+  <ellipse cx="120" cy="180" rx="75" ry="12" fill="#e2e8f0"/>
+  
+  <!-- Fish Tail Fin -->
+  <path d="M 175 120 L 210 85 C 205 105, 205 135, 210 155 Z" fill="#64748b" stroke="#475569" stroke-width="2"/>
+  
+  <!-- Dorsal Fin -->
+  <path d="M 100 82 C 120 65, 140 70, 155 88 Z" fill="#64748b" stroke="#475569" stroke-width="1.5"/>
+  
+  <!-- Ventral & Pectoral Fins -->
+  <path d="M 115 155 C 130 168, 145 165, 150 150 Z" fill="#64748b"/>
+  <path d="M 80 138 C 95 152, 105 145, 95 130 Z" fill="#94a3b8"/>
+
+  <!-- Fish Body -->
+  <path d="M 40 120 C 65 78, 145 78, 180 120 C 145 160, 65 160, 40 120 Z" fill="url(#fishGrad)" stroke="#475569" stroke-width="2"/>
+  
+  <defs>
+    <linearGradient id="fishGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#475569"/>
+      <stop offset="25%" stop-color="#94a3b8"/>
+      <stop offset="60%" stop-color="#cbd5e1"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fish Scales Pattern (Subtle) -->
+  <path d="M 95 105 C 105 115, 105 125, 95 135" stroke="#94a3b8" stroke-width="1.5" fill="none"/>
+  <path d="M 115 102 C 125 115, 125 128, 115 138" stroke="#94a3b8" stroke-width="1.5" fill="none"/>
+  <path d="M 135 105 C 145 115, 145 125, 135 135" stroke="#94a3b8" stroke-width="1.5" fill="none"/>
+  <path d="M 152 110 C 158 118, 158 122, 152 130" stroke="#94a3b8" stroke-width="1.5" fill="none"/>
+
+  <!-- Fish Head Details & Gill -->
+  <path d="M 75 95 C 82 108, 82 130, 75 142" stroke="#475569" stroke-width="2" fill="none"/>
+  
+  <!-- Fish Eye -->
+  <circle cx="58" cy="112" r="6" fill="#0f172a"/>
+  <circle cx="56" cy="110" r="2" fill="#ffffff"/>
+  <circle cx="58" cy="112" r="7" stroke="#cbd5e1" stroke-width="1" fill="none"/>
+
+  <!-- Mouth -->
+  <path d="M 40 120 L 46 122" stroke="#334155" stroke-width="2"/>
+  
+  <!-- River Fresh Badge -->
+  <rect x="70" y="200" width="100" height="20" rx="3" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="120" y="214" font-family="'Noto Serif Bengali', system-ui, sans-serif" font-size="10" font-weight="700" fill="#065f46" text-anchor="middle">নদীর তাজা রুই</text>
+</svg>

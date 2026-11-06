@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" fill="none">
+  <!-- Soft background plate -->
+  <rect width="240" height="240" rx="4" fill="#f8fafc"/>
+  
+  <!-- Bottle Shadow -->
+  <ellipse cx="120" cy="195" rx="45" ry="10" fill="#e2e8f0"/>
+  
+  <!-- Oil Bottle Handle (Right side) -->
+  <path d="M 148 100 C 168 100, 168 145, 148 145" stroke="#f59e0b" stroke-width="8" stroke-linecap="round" fill="none"/>
+
+  <!-- Bottle Body (Clear plastic container filled with golden oil) -->
+  <rect x="85" y="80" width="70" height="110" rx="10" fill="url(#oilGrad)" stroke="#d97706" stroke-width="2"/>
+  
+  <defs>
+    <linearGradient id="oilGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="30%" stop-color="#fef08a"/>
+      <stop offset="70%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Bottle Neck & Cap -->
+  <rect x="106" y="55" width="28" height="26" fill="#fef08a" stroke="#d97706" stroke-width="1.5"/>
+  <rect x="102" y="44" width="36" height="14" rx="2" fill="#dc2626" stroke="#b91c1c" stroke-width="1.5"/>
+  
+  <!-- Bottle Label (White brand label with green leaf/circle) -->
+  <rect x="92" y="105" width="56" height="58" rx="4" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <circle cx="120" cy="125" r="14" fill="#16a34a"/>
+  <path d="M 115 125 C 115 119, 120 115, 125 115 C 125 121, 120 125, 115 125 Z" fill="#ffffff"/>
+  <text x="120" y="148" font-family="'Noto Serif Bengali', system-ui, sans-serif" font-size="8" font-weight="700" fill="#0f172a" text-anchor="middle">সয়াবিন তেল</text>
+  <text x="120" y="157" font-family="system-ui, sans-serif" font-size="7" font-weight="600" fill="#dc2626" text-anchor="middle">৫ লিটার</text>
+  
+  <!-- Fresh Label Accent -->
+  <rect x="70" y="208" width="100" height="20" rx="3" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="120" y="222" font-family="'Noto Serif Bengali', system-ui, sans-serif" font-size="10" font-weight="700" fill="#065f46" text-anchor="middle">১০০% খাঁটি তেল</text>
+</svg>
