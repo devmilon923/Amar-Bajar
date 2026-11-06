@@ -171,7 +171,7 @@ export function Footer() {
         {/* 3. Bottom Copyright Strip */}
         <div className="mt-10 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400 pb-16 md:pb-0">
           <div>
-            © {new Date().getFullYear()} আমারবাজার টেকনোলজিস লিমিটেড। সর্বস্বত্ব সংরক্ষিত।
+            © 2026 আমারবাজার টেকনোলজিস লিমিটেড। সর্বস্বত্ব সংরক্ষিত।
           </div>
           <div className="flex items-center gap-5">
             <Link href="#privacy" className="hover:text-emerald-400 transition-colors duration-150">
