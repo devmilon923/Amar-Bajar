@@ -1,20 +1,28 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { UploadCloud, Check, Plus, Minus, FileText, ArrowRight } from "lucide-react";
+import { UploadCloud, Check, ArrowRight } from "lucide-react";
 import { PHARMACY_ITEMS, PharmacyItem } from "@/lib/data/products";
 import { Button } from "@/components/ui/button";
+import { ProductCard } from "@/components/product/ProductCard";
+import { ProductDetailsModal } from "@/components/product/ProductDetailsModal";
 
 interface PharmacySectionProps {
   onAddToCart?: (item: { id: string; title: string; price: number }) => void;
   onPrescriptionUploaded?: (fileName: string) => void;
 }
 
-export function PharmacySection({ onAddToCart, onPrescriptionUploaded }: PharmacySectionProps) {
-  const [itemCounts, setItemCounts] = React.useState<Record<string, number>>({});
+export function PharmacySection({
+  onAddToCart,
+  onPrescriptionUploaded,
+}: PharmacySectionProps) {
+  const [itemCounts, setItemCounts] = React.useState<Record<string, number>>(
+    {},
+  );
   const [prescriptionUploaded, setPrescriptionUploaded] = React.useState(false);
+  const [selectedDetailItem, setSelectedDetailItem] =
+    React.useState<PharmacyItem | null>(null);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   // Landing page displays a maximum of 2 rows (5 products per row = max 10 products)
@@ -26,7 +34,7 @@ export function PharmacySection({ onAddToCart, onPrescriptionUploaded }: Pharmac
     setItemCounts((prev) => ({ ...prev, [item.id]: next }));
     onAddToCart?.({
       id: item.id,
-      title: `${item.name} (${item.packSize})`,
+      title: `${item.name} (${item.unit})`,
       price: item.price,
     });
   };
@@ -54,9 +62,11 @@ export function PharmacySection({ onAddToCart, onPrescriptionUploaded }: Pharmac
   };
 
   return (
-    <section id="pharmacy" className="py-8 sm:py-12 bg-slate-50/70 border-b border-slate-200/90">
+    <section
+      id="pharmacy"
+      className="py-8 sm:py-12 bg-slate-50/70 border-b border-slate-200/90"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
         {/* Section Header: Title + Best Seller Badge -> Description */}
         <div className="mb-5 flex flex-col md:flex-row md:items-end justify-between gap-3">
           <div>
@@ -65,12 +75,10 @@ export function PharmacySection({ onAddToCart, onPrescriptionUploaded }: Pharmac
               <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
                 জরুরি ওষুধ ও ফার্মেসি
               </h2>
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-xs bg-sky-50 text-sky-800 border border-sky-200 text-[11px] font-bold shadow-2xs">
-                ⭐ সর্বাধিক প্রয়োজনীয়
-              </span>
             </div>
             <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl">
-              ১০০% আসল প্রেসক্রিপশন মেডিসিন ও হেলথকেয়ার পণ্য — গ্রোসারির সাথে একই ব্যাগে ৩০ মিনিটে ডেলিভারি।
+              ১০০% আসল প্রেসক্রিপশন মেডিসিন ও হেলথকেয়ার পণ্য — গ্রোসারির সাথে
+              একই ব্যাগে ৩০ মিনিটে ডেলিভারি।
             </p>
           </div>
 
@@ -95,7 +103,8 @@ export function PharmacySection({ onAddToCart, onPrescriptionUploaded }: Pharmac
                 ডাক্তারের প্রেসক্রিপশন আছে? ছবি তুলে সরাসরি আপলোড করুন
               </h3>
               <p className="text-[11px] text-slate-600">
-                আমাদের রেজিস্টার্ড ফার্মাসিস্ট যাচাই করে দ্রুত ওষুধ পাঠিয়ে দেবে • প্রেসক্রিপশনে ফ্ল্যাট ১০% ছাড়
+                আমাদের রেজিস্টার্ড ফার্মাসিস্ট যাচাই করে দ্রুত ওষুধ পাঠিয়ে দেবে
+                • প্রেসক্রিপশনে ফ্ল্যাট ১০% ছাড়
               </p>
             </div>
           </div>
@@ -111,121 +120,36 @@ export function PharmacySection({ onAddToCart, onPrescriptionUploaded }: Pharmac
             <Button
               size="sm"
               onClick={() => fileInputRef.current?.click()}
-              className="w-full sm:w-auto bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs h-8 px-3.5 cursor-pointer shadow-2xs transition-colors duration-150"
+              className="w-full sm:w-auto h-8 px-4 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs rounded-sm cursor-pointer shadow-xs"
             >
               {prescriptionUploaded ? (
                 <>
                   <Check className="size-3.5 text-white" />
-                  <span>প্রেসক্রিপশন আপলোড হয়েছে</span>
+                  <span>আপলোড সফল</span>
                 </>
               ) : (
                 <>
-                  <FileText className="size-3.5" />
-                  <span>প্রেসক্রিপশন আপলোড করুন</span>
+                  <UploadCloud className="size-3.5 text-white" />
+                  <span>প্রেসক্রিপশন আপলোড</span>
                 </>
               )}
             </Button>
           </div>
         </div>
 
-        {/* Responsive Product Grid: STRICTLY 5 cols desktop, 3 cols tablet, 2 cols mobile */}
+        {/* Product Grid: 5 columns on desktop, strictly 1:1 image aspect ratio */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-4">
-          {displayItems.map((item) => {
-            const count = itemCounts[item.id] || 0;
-
-            return (
-              <div
-                key={item.id}
-                className="group flex flex-col justify-between bg-white border border-slate-200/90 rounded-sm p-3.5 shadow-xs hover:border-slate-300 hover:shadow-sm transition-all duration-150"
-              >
-                <div>
-                  {/* Thumbnail Container: STRICT 1:1 Aspect Ratio */}
-                  <div className="relative aspect-square w-full bg-slate-50/80 rounded-sm mb-3 overflow-hidden flex items-center justify-center p-3">
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      width={160}
-                      height={160}
-                      className="size-full object-contain group-hover:scale-103 transition-transform duration-150 select-none"
-                    />
-                    {item.prescriptionRequired ? (
-                      <span className="absolute top-2 left-2 bg-amber-600 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-sm shadow-xs">
-                        প্রেসক্রিপশন
-                      </span>
-                    ) : (
-                      <span className="absolute top-2 left-2 bg-sky-600 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-sm shadow-xs">
-                        OTC
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Manufacturer & Pack Size */}
-                  <div className="flex items-center justify-between text-[10px] text-slate-500 font-medium mb-1">
-                    <span className="truncate max-w-[110px]">{item.manufacturer}</span>
-                    <span className="shrink-0">{item.packSize.split(" ")[0]}</span>
-                  </div>
-
-                  {/* Brand & Strength */}
-                  <h3 className="text-sm font-bold text-slate-900 line-clamp-1 group-hover:text-sky-700 transition-colors">
-                    {item.name}
-                  </h3>
-
-                  {/* Generic Info */}
-                  <p className="text-[11px] text-slate-500 line-clamp-1 mt-0.5">
-                    {item.generic} • {item.strength}
-                  </p>
-                </div>
-
-                {/* Price & Primary Add Stepper */}
-                <div className="mt-3.5 pt-2.5 border-t border-slate-100 flex items-center justify-between gap-2">
-                  <div>
-                    <span className="text-base font-bold text-slate-900 block leading-tight">
-                      ৳{item.price}
-                    </span>
-                    {item.originalPrice && (
-                      <span className="text-[11px] text-slate-400 line-through mt-0.5 block">
-                        ৳{item.originalPrice}
-                      </span>
-                    )}
-                  </div>
-
-                  {count === 0 ? (
-                    <button
-                      type="button"
-                      onClick={() => handleAdd(item)}
-                      className="h-8 px-3 rounded-sm bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all duration-150 cursor-pointer flex items-center gap-1 shadow-xs shrink-0"
-                    >
-                      <Plus className="size-3.5" />
-                      <span>যোগ</span>
-                    </button>
-                  ) : (
-                    <div className="flex items-center border border-emerald-600 rounded-sm bg-emerald-600 text-white shadow-xs shrink-0">
-                      <button
-                        type="button"
-                        onClick={() => handleDecrement(item)}
-                        className="size-8 flex items-center justify-center hover:bg-emerald-700 transition-colors cursor-pointer"
-                        aria-label="Decrease quantity"
-                      >
-                        <Minus className="size-3.5" />
-                      </button>
-                      <span className="px-1.5 text-xs font-bold min-w-[20px] text-center select-none">
-                        {count}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => handleAdd(item)}
-                        className="size-8 flex items-center justify-center hover:bg-emerald-700 transition-colors cursor-pointer"
-                        aria-label="Increase quantity"
-                      >
-                        <Plus className="size-3.5" />
-                      </button>
-                    </div>
-                  )}
-                </div>
-
-              </div>
-            );
-          })}
+          {displayItems.map((item) => (
+            <ProductCard
+              key={item.id}
+              product={item}
+              productType="medicine"
+              count={itemCounts[item.id] || 0}
+              onAdd={() => handleAdd(item)}
+              onDecrement={() => handleDecrement(item)}
+              onOpenDetails={() => setSelectedDetailItem(item)}
+            />
+          ))}
         </div>
 
         {/* Show More Medicines Button (Navigates to dedicated /pharmacy page) */}
@@ -236,12 +160,26 @@ export function PharmacySection({ onAddToCart, onPrescriptionUploaded }: Pharmac
               size="lg"
               className="px-6 py-2.5 h-10 border-slate-300 hover:border-sky-600 hover:bg-sky-50/40 text-slate-800 hover:text-sky-700 font-bold text-xs sm:text-sm rounded-sm transition-colors duration-150 cursor-pointer inline-flex items-center gap-2"
             >
-              <span>ফার্মেসির আরও ওষুধ দেখুন</span>
+              <span>ফার্মেসির সকল ওষুধ দেখুন</span>
               <ArrowRight className="size-4 text-sky-600" />
             </Button>
           </Link>
         </div>
 
+        {/* Product Details Modal */}
+        <ProductDetailsModal
+          isOpen={!!selectedDetailItem}
+          onClose={() => setSelectedDetailItem(null)}
+          product={selectedDetailItem}
+          productType="medicine"
+          count={
+            selectedDetailItem ? itemCounts[selectedDetailItem.id] || 0 : 0
+          }
+          onAdd={() => selectedDetailItem && handleAdd(selectedDetailItem)}
+          onDecrement={() =>
+            selectedDetailItem && handleDecrement(selectedDetailItem)
+          }
+        />
       </div>
     </section>
   );

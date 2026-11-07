@@ -9,6 +9,8 @@ export interface BazarItem {
   badge?: string;
   category: "all" | "vegetables" | "fish_meat" | "staples";
   stock?: boolean;
+  description?: string;
+  origin?: string;
 }
 
 export interface PharmacyItem {
@@ -18,11 +20,14 @@ export interface PharmacyItem {
   strength: string;
   manufacturer: string;
   packSize: string;
+  unit: string; // strictly "পিস" (e.g. "১০ পিস", "৪ পিস")
   price: number;
   originalPrice?: number;
   image: string;
   prescriptionRequired: boolean;
   stock?: boolean;
+  useCases?: string;
+  storage?: string;
 }
 
 export const BAZAR_ITEMS: BazarItem[] = [
@@ -146,10 +151,13 @@ export const PHARMACY_ITEMS: PharmacyItem[] = [
     strength: "500mg + 65mg",
     manufacturer: "Beximco Pharma",
     packSize: "১ পাতা (১০টি ট্যাবলেট)",
+    unit: "১০ পিস",
     price: 30,
     originalPrice: 35,
     image: "/products/napa.svg",
     prescriptionRequired: false,
+    useCases: "তীব্র জ্বর, মাথাব্যথা, মাইগ্রেন, দাঁতের ব্যথা ও ফ্লু উপসর্গে চিকিৎসকের নির্দেশনায় সেব্য।",
+    storage: "আলো ও আর্দ্রতা থেকে দূরে, ৩০°C এর নিচে সংরক্ষণ করুন।",
   },
   {
     id: "p2",
@@ -158,10 +166,13 @@ export const PHARMACY_ITEMS: PharmacyItem[] = [
     strength: "20mg",
     manufacturer: "Square Pharmaceuticals",
     packSize: "১ পাতা (১০টি ক্যাপসুল)",
+    unit: "১০ পিস",
     price: 60,
     originalPrice: 70,
     image: "/products/seclo.svg",
     prescriptionRequired: false,
+    useCases: "গ্যাস্ট্রিক আলসার, এসিডিটি, বুকজ্বালা ও বুক ভার হয়ে থাকার সমস্যা নিরাময়ে কার্যকরী।",
+    storage: "শুকনো ও শীতল স্থানে রাখুন। শিশুদের নাগালের বাইরে রাখুন।",
   },
   {
     id: "p3",
@@ -170,10 +181,13 @@ export const PHARMACY_ITEMS: PharmacyItem[] = [
     strength: "WHO Formula",
     manufacturer: "SMC Enterprise",
     packSize: "৫টি স্যাশে প্যাক",
+    unit: "৫ পিস",
     price: 35,
     originalPrice: 40,
     image: "/products/orsaline.svg",
     prescriptionRequired: false,
+    useCases: "ডায়রিয়া, বমি বা অতিরিক্ত গরমে পানিশূন্যতা ও লবণ ঘাটতি পূরণে তাৎক্ষণিক রিহাইড্রেশন স্যালাইন।",
+    storage: "শুকনো জায়গায় সংরক্ষণ করুন। প্রতি প্যাকেট ৫০০ মি.লি. ফুটানো পানিতে গুলুন।",
   },
   {
     id: "p4",
@@ -182,10 +196,13 @@ export const PHARMACY_ITEMS: PharmacyItem[] = [
     strength: "জীবাণুনাশক লিকুইড",
     manufacturer: "ACI Consumer Care",
     packSize: "১০০ মি.লি. বোতল",
+    unit: "১ পিস",
     price: 65,
     originalPrice: 75,
     image: "/products/savlon.svg",
     prescriptionRequired: false,
+    useCases: "কাটা-ছেঁড়া, ছাল ওঠা ও ক্ষতস্থান জীবাণুমুক্ত করতে এবং প্রাথমিক প্রাথমিক চিকিৎসায় ব্যবহৃত জীবাণুনাশক।",
+    storage: "সরাসরি সূর্যের আলো থেকে দূরে শীতল স্থানে সংরক্ষণ করুন।",
   },
   {
     id: "p5",
@@ -194,10 +211,13 @@ export const PHARMACY_ITEMS: PharmacyItem[] = [
     strength: "40000 IU",
     manufacturer: "Incepta Pharmaceuticals",
     packSize: "৪টি সফট ক্যাপসুল",
+    unit: "৪ পিস",
     price: 180,
     originalPrice: 200,
     image: "/products/drise.svg",
     prescriptionRequired: true,
+    useCases: "ভিটামিন ডি৩ ঘাটতি পূরণ, হাড় ও দাঁতের মজবুতি এবং রোগ প্রতিরোধ ক্ষমতা বৃদ্ধিতে নির্দেশিত।",
+    storage: "২৫°C এর নিচে শুকনো ও আলো সুরক্ষিত স্থানে রাখুন।",
   },
   {
     id: "p6",
@@ -206,10 +226,13 @@ export const PHARMACY_ITEMS: PharmacyItem[] = [
     strength: "120mg (এলার্জি)",
     manufacturer: "Square Pharmaceuticals",
     packSize: "১ পাতা (১০টি ট্যাবলেট)",
+    unit: "১০ পিস",
     price: 85,
     originalPrice: 95,
     image: "/products/fexo.svg",
     prescriptionRequired: false,
+    useCases: "অ্যালার্জিক রাইনাইটিস, হাঁচি, সর্দি, চোখ দিয়ে পানি পড়া ও ত্বকের অ্যালার্জি চুলকানি প্রশমনে।",
+    storage: "৩০°C এর নিচে সংরক্ষণ করুন।",
   },
   {
     id: "p7",
@@ -218,10 +241,13 @@ export const PHARMACY_ITEMS: PharmacyItem[] = [
     strength: "500mg + 65mg",
     manufacturer: "Square Pharmaceuticals",
     packSize: "১ পাতা (১০টি ট্যাবলেট)",
+    unit: "১০ পিস",
     price: 30,
     originalPrice: 35,
     image: "/products/ace.svg",
     prescriptionRequired: false,
+    useCases: "মাথাব্যথা, সর্দি-জ্বর, দাঁতের ব্যথা, কানের ব্যথা ও স্নায়ুবিক ব্যথায় দ্রুত ব্যথানাশক হিসেবে কার্যকর।",
+    storage: "আলো ও আর্দ্রতা থেকে সুরক্ষিত রাখুন।",
   },
   {
     id: "p8",
@@ -230,10 +256,13 @@ export const PHARMACY_ITEMS: PharmacyItem[] = [
     strength: "500mg",
     manufacturer: "Beximco Pharma",
     packSize: "১ পাতা (১০টি ট্যাবলেট)",
+    unit: "১০ পিস",
     price: 15,
     originalPrice: 18,
     image: "/products/napa.svg",
     prescriptionRequired: false,
+    useCases: "সাধারণ জ্বর, শারীরিক দুর্বলতা, গলাব্যথা ও হালকা থেকে মাঝারি শারীরিক ব্যথা উপশমে।",
+    storage: "৩০°C এর নিচে শুকনো জায়গায় রাখুন।",
   },
   {
     id: "p9",
@@ -242,10 +271,13 @@ export const PHARMACY_ITEMS: PharmacyItem[] = [
     strength: "40mg",
     manufacturer: "Square Pharmaceuticals",
     packSize: "১ পাতা (১০টি ক্যাপসুল)",
+    unit: "১০ পিস",
     price: 110,
     originalPrice: 120,
     image: "/products/seclo.svg",
     prescriptionRequired: true,
+    useCases: "তীব্র পেপটিক আলসার, অ্যাসিড রিফ্লাক্স ও দীর্ঘমেয়াদি গ্যাস্ট্রিকের চিকিৎসায় বিশেষজ্ঞ চিকিৎসকের প্রেসক্রিপশনে নির্দেশিত।",
+    storage: "আর্দ্রতা থেকে দূরে শীতল স্থানে সংরক্ষণ করুন।",
   },
   {
     id: "p10",
@@ -254,10 +286,13 @@ export const PHARMACY_ITEMS: PharmacyItem[] = [
     strength: "জীবাণুনাশক লিকুইড",
     manufacturer: "ACI Consumer Care",
     packSize: "৫০০ মি.লি. ফ্যামিলি প্যাক",
+    unit: "১ পিস",
     price: 210,
     originalPrice: 230,
     image: "/products/savlon.svg",
     prescriptionRequired: false,
+    useCases: "ঘরের মেঝে ও কাপড়চোপড় জীবাণুমুক্তকরণ এবং পারিবারিক প্রাথমিক চিকিৎসায় বহুল ব্যবহৃত অ্যান্টিসেপ্টিক লিকুইড।",
+    storage: "শিশুদের নাগাল থেকে দূরে রাখুন। কেবল বাহ্যিক ব্যবহারের জন্য।",
   },
 ];
 

@@ -1,20 +1,20 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { Plus, Minus, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { BAZAR_ITEMS, BazarItem } from "@/lib/data/products";
 import { Button } from "@/components/ui/button";
+import { ProductCard } from "@/components/product/ProductCard";
+import { ProductDetailsModal } from "@/components/product/ProductDetailsModal";
 
 interface BazarSectionProps {
   onAddToCart?: (item: { id: string; title: string; price: number }) => void;
 }
 
 export function BazarSection({ onAddToCart }: BazarSectionProps) {
-  const [itemCounts, setItemCounts] = React.useState<Record<string, number>>(
-    {},
-  );
+  const [itemCounts, setItemCounts] = React.useState<Record<string, number>>({});
+  const [selectedDetailItem, setSelectedDetailItem] = React.useState<BazarItem | null>(null);
 
   // Landing page displays the top 10 most-selling products (2 rows of 5)
   const displayItems = BAZAR_ITEMS.slice(0, 10);
@@ -57,10 +57,10 @@ export function BazarSection({ onAddToCart }: BazarSectionProps) {
               <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
                 কাঁচাবাজার ও নিত্যপণ্য
               </h2>
+    
             </div>
             <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl">
-              দৈনন্দিন চাহিদাসম্পন্ন সর্বাধিক বিক্রিত তাজা কাঁচাবাজার — সরাসরি
-              আড়ত ও খামার থেকে বাছাইকৃত ৩০ মিনিটে ডেলিভারি।
+              দৈনন্দিন চাহিদাসম্পন্ন সর্বাধিক বিক্রিত তাজা কাঁচাবাজার — সরাসরি আড়ত ও খামার থেকে বাছাইকৃত ৩০ মিনিটে ডেলিভারি।
             </p>
           </div>
 
@@ -76,99 +76,17 @@ export function BazarSection({ onAddToCart }: BazarSectionProps) {
 
         {/* Responsive Product Grid: STRICTLY 5 cols desktop, 3 cols tablet, 2 cols mobile */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-4">
-          {displayItems.map((item) => {
-            const count = itemCounts[item.id] || 0;
-
-            return (
-              <div
-                key={item.id}
-                className="group flex flex-col justify-between bg-white border border-slate-200/90 rounded-sm p-3.5 shadow-xs hover:border-slate-300 hover:shadow-sm transition-all duration-150"
-              >
-                <div>
-                  {/* Product Image: STRICT 1:1 Aspect Ratio */}
-                  <div className="relative aspect-square w-full bg-slate-50/80 rounded-sm mb-3 overflow-hidden flex items-center justify-center p-3">
-                    <Image
-                      src={item.image}
-                      alt={item.bengaliName}
-                      width={160}
-                      height={160}
-                      className="size-full object-contain group-hover:scale-103 transition-transform duration-150 select-none"
-                    />
-                    {item.badge && (
-                      <span
-                        className={`absolute top-2 left-2 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-xs shadow-xs ${
-                          item.badge.includes("বিক্রিত") ||
-                          item.badge.includes("সেলার")
-                            ? "bg-amber-600"
-                            : "bg-emerald-600"
-                        }`}
-                      >
-                        {item.badge}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Quantity Unit Specifier */}
-                  <span className="text-[11px] font-semibold text-slate-500 block mb-1">
-                    {item.unit}
-                  </span>
-
-                  {/* Product Title */}
-                  <h3 className="text-sm font-semibold text-slate-900 line-clamp-2 min-h-[38px] leading-snug group-hover:text-emerald-700 transition-colors">
-                    {item.bengaliName}
-                  </h3>
-                </div>
-
-                {/* Price & Action Section */}
-                <div className="mt-3.5 pt-2.5 border-t border-slate-100 flex items-center justify-between gap-2">
-                  <div>
-                    <span className="text-base font-bold text-slate-900 block leading-tight">
-                      ৳{item.price}
-                    </span>
-                    {item.originalPrice && (
-                      <span className="text-[11px] text-slate-400 line-through mt-0.5 block">
-                        ৳{item.originalPrice}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Add to Cart Stepper Button */}
-                  {count === 0 ? (
-                    <button
-                      type="button"
-                      onClick={() => handleAdd(item)}
-                      className="h-8 px-3 rounded-sm bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all duration-150 cursor-pointer flex items-center gap-1 shadow-xs shrink-0"
-                    >
-                      <Plus className="size-3.5" />
-                      <span>যোগ</span>
-                    </button>
-                  ) : (
-                    <div className="flex items-center border border-emerald-600 rounded-sm bg-emerald-600 text-white shadow-xs shrink-0">
-                      <button
-                        type="button"
-                        onClick={() => handleDecrement(item)}
-                        className="size-8 flex items-center justify-center hover:bg-emerald-700 transition-colors cursor-pointer"
-                        aria-label="Decrease quantity"
-                      >
-                        <Minus className="size-3.5" />
-                      </button>
-                      <span className="px-1.5 text-xs font-bold min-w-[20px] text-center select-none">
-                        {count}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => handleAdd(item)}
-                        className="size-8 flex items-center justify-center hover:bg-emerald-700 transition-colors cursor-pointer"
-                        aria-label="Increase quantity"
-                      >
-                        <Plus className="size-3.5" />
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </div>
-            );
-          })}
+          {displayItems.map((item) => (
+            <ProductCard
+              key={item.id}
+              product={item}
+              productType="grocery"
+              count={itemCounts[item.id] || 0}
+              onAdd={() => handleAdd(item)}
+              onDecrement={() => handleDecrement(item)}
+              onOpenDetails={() => setSelectedDetailItem(item)}
+            />
+          ))}
         </div>
 
         {/* Show More Products Button (Navigates to dedicated /bazar page) */}
@@ -184,6 +102,17 @@ export function BazarSection({ onAddToCart }: BazarSectionProps) {
             </Button>
           </Link>
         </div>
+
+        {/* Product Details Modal */}
+        <ProductDetailsModal
+          isOpen={!!selectedDetailItem}
+          onClose={() => setSelectedDetailItem(null)}
+          product={selectedDetailItem}
+          productType="grocery"
+          count={selectedDetailItem ? itemCounts[selectedDetailItem.id] || 0 : 0}
+          onAdd={() => selectedDetailItem && handleAdd(selectedDetailItem)}
+          onDecrement={() => selectedDetailItem && handleDecrement(selectedDetailItem)}
+        />
       </div>
     </section>
   );

@@ -1,13 +1,14 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { Search, Plus, Minus, ChevronRight, ArrowLeft } from "lucide-react";
+import { Search, ChevronRight, ArrowLeft } from "lucide-react";
 import { Navbar } from "@/components/navbar/Navbar";
 import { MobileBottomNav } from "@/components/navbar/MobileBottomNav";
 import { Footer } from "@/components/landing/Footer";
 import { BAZAR_ITEMS, BazarItem } from "@/lib/data/products";
+import { ProductCard } from "@/components/product/ProductCard";
+import { ProductDetailsModal } from "@/components/product/ProductDetailsModal";
 
 export default function BazarCatalogPage() {
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -17,6 +18,7 @@ export default function BazarCatalogPage() {
   const [cartCount, setCartCount] = React.useState(3);
   const [cartTotal, setCartTotal] = React.useState("৳১,৪৭৫");
   const [itemCounts, setItemCounts] = React.useState<Record<string, number>>({});
+  const [selectedDetailItem, setSelectedDetailItem] = React.useState<BazarItem | null>(null);
   const [toastMessage, setToastMessage] = React.useState<string | null>(null);
 
   const filteredItems = BAZAR_ITEMS.filter((item) => {
@@ -188,96 +190,32 @@ export default function BazarCatalogPage() {
             </div>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-4">
-              {filteredItems.map((item) => {
-                const count = itemCounts[item.id] || 0;
-
-                return (
-                  <div
-                    key={item.id}
-                    className="group flex flex-col justify-between bg-white border border-slate-200/90 rounded-sm p-3.5 shadow-xs hover:border-slate-300 hover:shadow-sm transition-all duration-150"
-                  >
-                    <div>
-                      {/* Product Image: STRICT 1:1 Aspect Ratio */}
-                      <div className="relative aspect-square w-full bg-slate-50/80 rounded-sm mb-3 overflow-hidden flex items-center justify-center p-3">
-                        <Image
-                          src={item.image}
-                          alt={item.bengaliName}
-                          width={160}
-                          height={160}
-                          className="size-full object-contain group-hover:scale-103 transition-transform duration-150 select-none"
-                        />
-                        {item.badge && (
-                          <span className="absolute top-2 left-2 bg-emerald-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-sm shadow-xs">
-                            {item.badge}
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Quantity Unit Specifier */}
-                      <span className="text-[11px] font-semibold text-slate-500 block mb-1">
-                        {item.unit}
-                      </span>
-
-                      {/* Product Title */}
-                      <h3 className="text-sm font-semibold text-slate-900 line-clamp-2 min-h-[38px] leading-snug group-hover:text-emerald-700 transition-colors">
-                        {item.bengaliName}
-                      </h3>
-                    </div>
-
-                    {/* Price & Action Section */}
-                    <div className="mt-3.5 pt-2.5 border-t border-slate-100 flex items-center justify-between gap-2">
-                      <div>
-                        <span className="text-base font-bold text-slate-900 block leading-tight">
-                          ৳{item.price}
-                        </span>
-                        {item.originalPrice && (
-                          <span className="text-[11px] text-slate-400 line-through mt-0.5 block">
-                            ৳{item.originalPrice}
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Add to Cart Stepper Button */}
-                      {count === 0 ? (
-                        <button
-                          type="button"
-                          onClick={() => handleAdd(item)}
-                          className="h-8 px-3 rounded-sm bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all duration-150 cursor-pointer flex items-center gap-1 shadow-xs shrink-0"
-                        >
-                          <Plus className="size-3.5" />
-                          <span>যোগ</span>
-                        </button>
-                      ) : (
-                        <div className="flex items-center border border-emerald-600 rounded-sm bg-emerald-600 text-white shadow-xs shrink-0">
-                          <button
-                            type="button"
-                            onClick={() => handleDecrement(item)}
-                            className="size-8 flex items-center justify-center hover:bg-emerald-700 transition-colors cursor-pointer"
-                            aria-label="Decrease quantity"
-                          >
-                            <Minus className="size-3.5" />
-                          </button>
-                          <span className="px-1.5 text-xs font-bold min-w-[20px] text-center select-none">
-                            {count}
-                          </span>
-                          <button
-                            type="button"
-                            onClick={() => handleAdd(item)}
-                            className="size-8 flex items-center justify-center hover:bg-emerald-700 transition-colors cursor-pointer"
-                            aria-label="Increase quantity"
-                          >
-                            <Plus className="size-3.5" />
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
+              {filteredItems.map((item) => (
+                <ProductCard
+                  key={item.id}
+                  product={item}
+                  productType="grocery"
+                  count={itemCounts[item.id] || 0}
+                  onAdd={() => handleAdd(item)}
+                  onDecrement={() => handleDecrement(item)}
+                  onOpenDetails={() => setSelectedDetailItem(item)}
+                />
+              ))}
             </div>
           )}
         </div>
       </main>
+
+      {/* Product Details Modal */}
+      <ProductDetailsModal
+        isOpen={!!selectedDetailItem}
+        onClose={() => setSelectedDetailItem(null)}
+        product={selectedDetailItem}
+        productType="grocery"
+        count={selectedDetailItem ? itemCounts[selectedDetailItem.id] || 0 : 0}
+        onAdd={() => selectedDetailItem && handleAdd(selectedDetailItem)}
+        onDecrement={() => selectedDetailItem && handleDecrement(selectedDetailItem)}
+      />
 
       <Footer />
       <MobileBottomNav activeTab="bazar" cartCount={cartCount} />
