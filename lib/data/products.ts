@@ -71,7 +71,7 @@ export const BAZAR_ITEMS: BazarItem[] = [
     unit: "১ ডজন (১২টি)",
     price: 145,
     originalPrice: 160,
-    image: "/products/common.png",
+    image: "/products/fish.svg",
     badge: "তাজা সংগ্রহ",
     category: "vegetables",
   },
