@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   RiHome5Line,
   RiHome5Fill,
@@ -27,8 +28,52 @@ export function MobileBottomNav({
   activeTab = "home",
   cartCount = 3,
 }: MobileBottomNavProps) {
-  const [selectedTab, setSelectedTab] = React.useState<TabId | null>(null);
-  const currentTab = selectedTab ?? activeTab;
+  const pathname = usePathname();
+  const [eventTab, setEventTab] = React.useState<TabId | null>(null);
+
+  // Derive route-based tab directly during render
+  const routeTab: TabId = React.useMemo(() => {
+    if (pathname.includes("/bazar")) return "bazar";
+    if (pathname.includes("/pharmacy")) return "pharmacy";
+    return activeTab;
+  }, [pathname, activeTab]);
+
+  // For specific sub-routes, route always takes precedence; otherwise eventTab or routeTab
+  const isSubRoute = pathname !== "/" && (pathname.includes("/bazar") || pathname.includes("/pharmacy"));
+  const currentTab = isSubRoute ? routeTab : (eventTab ?? routeTab);
+
+  // Listen to hash changes and custom navigation events across the app
+  React.useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash;
+      if (hash === "#gas") setEventTab("gas");
+      else if (hash === "#cart") setEventTab("cart");
+      else if (hash === "#bazar") setEventTab("bazar");
+      else if (hash === "#pharmacy") setEventTab("pharmacy");
+      else if (!hash && pathname === "/") setEventTab("home");
+    };
+
+    const handleCustomTab = (e: Event) => {
+      const detail = (e as CustomEvent<TabId>).detail;
+      if (detail) {
+        setEventTab(detail);
+      }
+    };
+
+    window.addEventListener("hashchange", handleHash);
+    window.addEventListener("ab-tab-change", handleCustomTab);
+    return () => {
+      window.removeEventListener("hashchange", handleHash);
+      window.removeEventListener("ab-tab-change", handleCustomTab);
+    };
+  }, [pathname]);
+
+  const handleTabClick = (tabId: TabId) => {
+    setEventTab(tabId);
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("ab-tab-change", { detail: tabId }));
+    }
+  };
 
   const tabs = [
     {
@@ -85,7 +130,7 @@ export function MobileBottomNav({
             <Link
               key={tab.id}
               href={tab.href}
-              onClick={() => setSelectedTab(tab.id)}
+              onClick={() => handleTabClick(tab.id)}
               className="group relative flex flex-col items-center justify-center min-w-[54px] min-h-[44px] py-1 transition-colors duration-150 ease-out select-none"
             >
               {/* Active Indicator Bar */}

@@ -8,11 +8,12 @@ import {
   ShoppingBag,
   Flame,
   User,
-  Menu,
   X,
   Clock,
-  ArrowRight,
   ShieldCheck,
+  Headphones,
+  PhoneCall,
+  MessageSquare,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -31,8 +32,8 @@ const SEARCH_SUGGESTIONS = [
   { category: "ফার্মেসি", label: "Napa Extra Tablet (নাপা)", link: "/pharmacy", icon: "💊" },
   { category: "ফার্মেসি", label: "Seclo 20mg Capsule (গ্যাস্ট্রিক)", link: "/pharmacy", icon: "💊" },
   { category: "ফার্মেসি", label: "SMC ORSaline-N (ওরস্যালাইন)", link: "/pharmacy", icon: "💧" },
-  { category: "এলপি গ্যাস", label: "বসুন্ধরা ১২ কেজি সিলিন্ডার রিফিল", link: "/#gas", icon: "🛢️" },
-  { category: "এলপি গ্যাস", label: "ওমেরা ১২ কেজি সিলিন্ডার রিফিল", link: "/#gas", icon: "🛢️" },
+  { category: "এলপি গ্যাস", label: "বসুন্ধরা ১২ কেজি সিলিন্ডার রিফিল", link: "/#gas", icon: "🔥" },
+  { category: "এলপি গ্যাস", label: "ওমেরা ১২ কেজি সিলিন্ডার রিফিল", link: "/#gas", icon: "🔥" },
 ];
 
 export function Navbar({
@@ -40,8 +41,8 @@ export function Navbar({
   cartTotal = "৳১,৪৭৫",
 }: NavbarProps) {
   const router = useRouter();
-  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = React.useState(false);
+  const [supportModalOpen, setSupportModalOpen] = React.useState(false);
   const [searchQuery, setSearchQuery] = React.useState("");
   const [searchFocused, setSearchFocused] = React.useState(false);
   const searchContainerRef = React.useRef<HTMLDivElement>(null);
@@ -154,8 +155,22 @@ export function Navbar({
           )}
         </div>
 
-        {/* Group 3: Customer Actions (LP Gas Direct | Cart Bag | Login) */}
-        <div className="hidden md:flex items-center gap-3 shrink-0">
+        {/* Group 3: Customer Actions (Support | LP Gas Direct | Cart Bag | Login) */}
+        <div className="hidden md:flex items-center gap-2.5 shrink-0">
+          {/* Customer Support Helpline */}
+          <button
+            type="button"
+            onClick={() => setSupportModalOpen(true)}
+            className="flex items-center gap-1.5 h-10 px-2.5 rounded-sm border border-slate-200/90 hover:border-emerald-500 hover:bg-emerald-50/30 text-slate-700 transition-colors duration-150 text-xs font-semibold cursor-pointer group"
+            title="২৪/৭ গ্রাহক সেবা ও হেল্পলাইন"
+          >
+            <Headphones className="size-4 text-emerald-600 group-hover:scale-110 transition-transform" />
+            <div className="flex flex-col text-left leading-none">
+              <span className="text-[9px] uppercase font-bold text-slate-400">২৪/৭ সেবা</span>
+              <span className="text-xs font-bold text-slate-800 group-hover:text-emerald-700 mt-0.5">সহায়তা</span>
+            </div>
+          </button>
+
           {/* LP Gas Quick Express Link */}
           <Link
             href="/#gas"
@@ -199,7 +214,7 @@ export function Navbar({
           </Link>
         </div>
 
-        {/* Mobile Header Actions */}
+        {/* Mobile Header Actions (Cleaned: Search + Support + Direct Auth Login) */}
         <div className="flex items-center gap-1.5 md:hidden">
           <button
             type="button"
@@ -210,35 +225,27 @@ export function Navbar({
             {mobileSearchOpen ? <X className="size-5" /> : <Search className="size-5" />}
           </button>
 
-          <Link
-            href="/#gas"
-            className="flex items-center justify-center size-9 rounded-sm text-orange-600 bg-orange-50 border border-orange-200"
-            title="গ্যাস বুকিং"
-          >
-            <Flame className="size-4" />
-          </Link>
-
-          <Link
-            href="/#cart"
-            className="relative flex items-center justify-center size-9 rounded-sm text-slate-700 hover:bg-slate-100 transition-colors duration-150"
-            aria-label="Cart"
-          >
-            <ShoppingBag className="size-5" />
-            {cartCount > 0 && (
-              <span className="absolute top-1 right-0.5 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-emerald-600 px-1 text-[10px] font-bold text-white">
-                {cartCount}
-              </span>
-            )}
-          </Link>
-
+          {/* Customer Support Icon Button */}
           <button
             type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="flex items-center justify-center size-9 rounded-sm text-slate-700 hover:bg-slate-100 transition-colors duration-150 cursor-pointer"
-            aria-label="Menu"
+            onClick={() => setSupportModalOpen(true)}
+            className="flex items-center justify-center size-9 rounded-sm border border-slate-200/90 bg-slate-50/80 hover:bg-slate-100 text-slate-700 transition-colors duration-150 cursor-pointer shadow-2xs"
+            title="২৪/৭ গ্রাহক সহায়তা"
+            aria-label="গ্রাহক সহায়তা"
           >
-            {mobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+            <Headphones className="size-4 text-emerald-600" />
           </button>
+
+          {/* Auth Icon / Login Button (Replaces redundant hamburger drawer) */}
+          <Link
+            href="/#account"
+            className="flex items-center gap-1.5 h-9 px-2.5 rounded-sm border border-slate-200 bg-slate-50/80 hover:bg-slate-100 text-slate-700 text-xs font-semibold transition-colors duration-150 cursor-pointer shadow-2xs"
+            title="লগইন / প্রোফাইল"
+            aria-label="লগইন"
+          >
+            <User className="size-4 text-emerald-600" />
+            <span className="font-bold text-slate-800">লগইন</span>
+          </Link>
         </div>
 
       </div>
@@ -272,9 +279,20 @@ export function Navbar({
             </Link>
           </nav>
 
-          <div className="flex items-center gap-2 text-[11px] text-slate-500 font-medium">
-            <ShieldCheck className="size-3.5 text-emerald-600" />
-            <span>বাজার ও ওষুধ একসাথে ১টি অর্ডারে ৩০ মিনিটে ডেলিভারি</span>
+          <div className="flex items-center gap-3 text-[11px] text-slate-500 font-medium">
+            <button
+              type="button"
+              onClick={() => setSupportModalOpen(true)}
+              className="flex items-center gap-1 text-slate-600 hover:text-emerald-700 transition-colors cursor-pointer"
+            >
+              <Headphones className="size-3 text-emerald-600" />
+              <span>হেল্পলাইন: ১৬২১১</span>
+            </button>
+            <span className="text-slate-300">|</span>
+            <span className="flex items-center gap-1">
+              <ShieldCheck className="size-3.5 text-emerald-600" />
+              <span>বাজার ও ওষুধ ৩০ মিনিটে ডেলিভারি</span>
+            </span>
             <span className="text-slate-300">|</span>
             <span className="flex items-center gap-1">
               <Clock className="size-3 text-emerald-600" />
@@ -312,21 +330,36 @@ export function Navbar({
             <span className="text-slate-400 shrink-0 font-medium">দ্রুত খুঁজুন:</span>
             <Link
               href="/bazar"
-              onClick={() => setMobileSearchOpen(false)}
+              onClick={() => {
+                setMobileSearchOpen(false);
+                if (typeof window !== "undefined") {
+                  window.dispatchEvent(new CustomEvent("ab-tab-change", { detail: "bazar" }));
+                }
+              }}
               className="px-2 py-0.5 rounded-sm bg-white border border-slate-200 text-slate-700 whitespace-nowrap"
             >
               কাঁচাবাজার
             </Link>
             <Link
               href="/pharmacy"
-              onClick={() => setMobileSearchOpen(false)}
+              onClick={() => {
+                setMobileSearchOpen(false);
+                if (typeof window !== "undefined") {
+                  window.dispatchEvent(new CustomEvent("ab-tab-change", { detail: "pharmacy" }));
+                }
+              }}
               className="px-2 py-0.5 rounded-sm bg-white border border-slate-200 text-slate-700 whitespace-nowrap"
             >
               ওষুধ
             </Link>
             <Link
               href="/#gas"
-              onClick={() => setMobileSearchOpen(false)}
+              onClick={() => {
+                setMobileSearchOpen(false);
+                if (typeof window !== "undefined") {
+                  window.dispatchEvent(new CustomEvent("ab-tab-change", { detail: "gas" }));
+                }
+              }}
               className="px-2 py-0.5 rounded-sm bg-white border border-slate-200 text-slate-700 whitespace-nowrap"
             >
               গ্যাস
@@ -335,71 +368,97 @@ export function Navbar({
         </div>
       )}
 
-      {/* 4. MOBILE SLIDE-OVER DRAWER */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 flex md:hidden">
+      {/* 4. CUSTOMER SUPPORT MODAL */}
+      {supportModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div
-            className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs transition-opacity duration-150"
-            onClick={() => setMobileMenuOpen(false)}
+            className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs transition-opacity duration-150"
+            onClick={() => setSupportModalOpen(false)}
           />
 
-          <div className="relative flex w-full max-w-xs flex-col bg-white shadow-xl z-50">
-            <div className="flex h-14 items-center justify-between border-b border-slate-200 px-4">
+          <div className="relative w-full max-w-sm rounded-sm bg-white p-5 shadow-2xl border border-slate-200 z-50 animate-in fade-in-0 zoom-in-95 duration-150">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <div className="flex items-center gap-2">
-                <div className="flex size-7 items-center justify-center rounded-sm bg-emerald-600 text-white font-bold text-sm">
-                  AB
+                <div className="flex size-8 items-center justify-center rounded-sm bg-emerald-100 text-emerald-700">
+                  <Headphones className="size-4.5" />
                 </div>
-                <span className="font-bold text-slate-900">AmarBajar</span>
+                <div>
+                  <h3 className="text-sm font-bold text-slate-900">গ্রাহক সহায়তা কেন্দ্র</h3>
+                  <span className="text-[11px] text-emerald-600 font-semibold flex items-center gap-1">
+                    <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    ২৪/৭ হেল্পলাইন চালু আছে
+                  </span>
+                </div>
               </div>
               <button
                 type="button"
-                onClick={() => setMobileMenuOpen(false)}
-                className="size-8 flex items-center justify-center rounded-sm text-slate-500 hover:bg-slate-100"
+                onClick={() => setSupportModalOpen(false)}
+                className="size-8 flex items-center justify-center rounded-sm text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer"
+                aria-label="Close"
               >
-                <X className="size-5" />
+                <X className="size-4.5" />
               </button>
             </div>
 
-            <div className="p-4 border-b border-slate-100 bg-slate-50">
-              <div className="text-sm font-bold text-slate-900">আমারবাজার</div>
-              <div className="text-xs text-slate-500 mt-0.5">বাজার, ওষুধ ও গ্যাস ৩০ মিনিটে ডেলিভারি</div>
-              <div className="mt-3 flex gap-2">
-                <Button size="sm" className="w-full font-bold">লগইন</Button>
-                <Button variant="outline" size="sm" className="w-full font-semibold">রেজিস্ট্রেশন</Button>
+            {/* Support Channels */}
+            <div className="mt-4 space-y-2.5">
+              {/* Direct Call / Hotline */}
+              <a
+                href="tel:16211"
+                className="flex items-center justify-between p-3 rounded-sm border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 transition-all group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex size-9 items-center justify-center rounded-sm bg-emerald-50 text-emerald-700 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                    <PhoneCall className="size-4.5" />
+                  </div>
+                  <div className="text-left">
+                    <div className="text-xs font-bold text-slate-900">হটলাইনে কল করুন</div>
+                    <div className="text-[11px] text-slate-500 font-medium">১৬২১১ (টোল ফ্রি) বা ০৯৬১২-৩৪৪৫৫</div>
+                  </div>
+                </div>
+                <span className="text-xs font-bold text-emerald-700 group-hover:translate-x-0.5 transition-transform">কল দিন →</span>
+              </a>
+
+              {/* WhatsApp Support */}
+              <a
+                href="https://wa.me/8801700000000"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between p-3 rounded-sm border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 transition-all group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex size-9 items-center justify-center rounded-sm bg-emerald-50 text-emerald-700 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                    <MessageSquare className="size-4.5" />
+                  </div>
+                  <div className="text-left">
+                    <div className="text-xs font-bold text-slate-900">হোয়াটসঅ্যাপে চ্যাট</div>
+                    <div className="text-[11px] text-slate-500 font-medium">তাৎক্ষণিক অর্ডার হেল্প ও আপডেট</div>
+                  </div>
+                </div>
+                <span className="text-xs font-bold text-emerald-700 group-hover:translate-x-0.5 transition-transform">চ্যাট করুন →</span>
+              </a>
+
+              {/* Live Order Support Info */}
+              <div className="p-3 rounded-sm bg-slate-50 border border-slate-100 text-[11px] text-slate-600 space-y-1">
+                <div className="font-bold text-slate-800 flex items-center gap-1.5">
+                  <Clock className="size-3.5 text-emerald-600" />
+                  <span>গড় রেসপন্স সময়: ২ মিনিট</span>
+                </div>
+                <p>বাজার, জরুরি ওষুধ বা গ্যাস রিফিল সম্পর্কিত যেকোনো সমস্যায় আমরা সার্বক্ষণিক আপনার পাশে আছি।</p>
               </div>
             </div>
 
-            {/* Navigation links */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-3">
-              <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-                প্রধান সেবা
-              </div>
-              <div className="space-y-1">
-                <Link
-                  href="/bazar"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-between py-2.5 px-3 rounded-sm hover:bg-slate-50 text-sm font-semibold text-slate-800"
-                >
-                  <span>🥦 কাঁচাবাজার ও নিত্যপণ্য</span>
-                  <ArrowRight className="size-4 text-slate-400" />
-                </Link>
-                <Link
-                  href="/pharmacy"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-between py-2.5 px-3 rounded-sm hover:bg-slate-50 text-sm font-semibold text-slate-800"
-                >
-                  <span>💊 জরুরি ওষুধ ও ফার্মেসি</span>
-                  <ArrowRight className="size-4 text-slate-400" />
-                </Link>
-                <Link
-                  href="/#gas"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-between py-2.5 px-3 rounded-sm hover:bg-slate-50 text-sm font-semibold text-slate-800"
-                >
-                  <span>🛢️ এলপি গ্যাস সিলিন্ডার</span>
-                  <ArrowRight className="size-4 text-slate-400" />
-                </Link>
-              </div>
+            {/* Close Button */}
+            <div className="mt-4">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setSupportModalOpen(false)}
+                className="w-full text-xs font-bold cursor-pointer"
+              >
+                বন্ধ করুন
+              </Button>
             </div>
           </div>
         </div>

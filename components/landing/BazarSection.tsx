@@ -12,17 +12,12 @@ interface BazarSectionProps {
 }
 
 export function BazarSection({ onAddToCart }: BazarSectionProps) {
-  const [activeCategory, setActiveCategory] = React.useState<
-    "all" | "vegetables" | "fish_meat" | "staples"
-  >("all");
-  const [itemCounts, setItemCounts] = React.useState<Record<string, number>>({});
-
-  const filteredItems = BAZAR_ITEMS.filter((item) =>
-    activeCategory === "all" ? true : item.category === activeCategory,
+  const [itemCounts, setItemCounts] = React.useState<Record<string, number>>(
+    {},
   );
 
-  // Landing page displays a maximum of 2 rows (5 products per row = max 10 products)
-  const displayItems = filteredItems.slice(0, 10);
+  // Landing page displays the top 10 most-selling products (2 rows of 5)
+  const displayItems = BAZAR_ITEMS.slice(0, 10);
 
   const handleAdd = (item: BazarItem) => {
     const current = itemCounts[item.id] || 0;
@@ -54,75 +49,27 @@ export function BazarSection({ onAddToCart }: BazarSectionProps) {
       className="py-8 sm:py-12 bg-white border-b border-slate-200/90"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section Header: Title -> Description -> Spacing -> Category Filters */}
-        <div className="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        {/* Section Header: Title + Best Seller Badge -> Description */}
+        <div className="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-3">
           <div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
               <span className="text-xl">🥦</span>
               <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
                 কাঁচাবাজার ও নিত্যপণ্য
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl">
-              প্রতিদিনের তাজা শাকসবজি, মাছ, মাংস ও রান্নার সওদা — সরাসরি আড়ত ও
-              খামার থেকে ৩০ মিনিটে ডেলিভারি।
+              দৈনন্দিন চাহিদাসম্পন্ন সর্বাধিক বিক্রিত তাজা কাঁচাবাজার — সরাসরি
+              আড়ত ও খামার থেকে বাছাইকৃত ৩০ মিনিটে ডেলিভারি।
             </p>
-
-            {/* Category Filters */}
-            <div className="mt-4 flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-              <button
-                type="button"
-                onClick={() => setActiveCategory("all")}
-                className={`px-3.5 py-1.5 rounded-sm text-xs font-semibold whitespace-nowrap transition-colors duration-150 cursor-pointer ${
-                  activeCategory === "all"
-                    ? "bg-emerald-600 text-white shadow-xs"
-                    : "bg-slate-100 hover:bg-slate-200 text-slate-700"
-                }`}
-              >
-                সকল পণ্য
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveCategory("vegetables")}
-                className={`px-3.5 py-1.5 rounded-sm text-xs font-semibold whitespace-nowrap transition-colors duration-150 cursor-pointer ${
-                  activeCategory === "vegetables"
-                    ? "bg-emerald-600 text-white shadow-xs"
-                    : "bg-slate-100 hover:bg-slate-200 text-slate-700"
-                }`}
-              >
-                তাজা শাকসবজি ও ডিম
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveCategory("fish_meat")}
-                className={`px-3.5 py-1.5 rounded-sm text-xs font-semibold whitespace-nowrap transition-colors duration-150 cursor-pointer ${
-                  activeCategory === "fish_meat"
-                    ? "bg-emerald-600 text-white shadow-xs"
-                    : "bg-slate-100 hover:bg-slate-200 text-slate-700"
-                }`}
-              >
-                মাছ ও মাংস
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveCategory("staples")}
-                className={`px-3.5 py-1.5 rounded-sm text-xs font-semibold whitespace-nowrap transition-colors duration-150 cursor-pointer ${
-                  activeCategory === "staples"
-                    ? "bg-emerald-600 text-white shadow-xs"
-                    : "bg-slate-100 hover:bg-slate-200 text-slate-700"
-                }`}
-              >
-                চাল, ডাল ও তেল
-              </button>
-            </div>
           </div>
 
-          {/* Quick link to catalog page */}
+          {/* Quick link to dedicated catalog page with all categories */}
           <Link
             href="/bazar"
-            className="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 hover:text-emerald-800 shrink-0 group py-1"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 hover:text-emerald-800 shrink-0 group py-1"
           >
-            <span>সব পণ্য দেখুন</span>
+            <span>সব পণ্য ও ক্যাটাগরি দেখুন</span>
             <ArrowRight className="size-3.5 group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </div>
@@ -148,7 +95,14 @@ export function BazarSection({ onAddToCart }: BazarSectionProps) {
                       className="size-full object-contain group-hover:scale-103 transition-transform duration-150 select-none"
                     />
                     {item.badge && (
-                      <span className="absolute top-2 left-2 bg-emerald-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-sm shadow-xs">
+                      <span
+                        className={`absolute top-2 left-2 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-xs shadow-xs ${
+                          item.badge.includes("বিক্রিত") ||
+                          item.badge.includes("সেলার")
+                            ? "bg-amber-600"
+                            : "bg-emerald-600"
+                        }`}
+                      >
                         {item.badge}
                       </span>
                     )}
@@ -230,7 +184,6 @@ export function BazarSection({ onAddToCart }: BazarSectionProps) {
             </Button>
           </Link>
         </div>
-
       </div>
     </section>
   );

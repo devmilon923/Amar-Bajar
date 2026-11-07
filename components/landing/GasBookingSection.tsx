@@ -87,7 +87,15 @@ export function GasBookingSection({ onDirectGasOrder }: GasBookingSectionProps) 
         {/* Section Header: Title -> Description */}
         <div className="mb-6">
           <div className="flex items-center gap-2">
-            <span className="text-xl">🛢️</span>
+            <div className="size-6 flex items-center justify-center">
+              <Image
+                src="/hero/gas.png"
+                alt="এলপি গ্যাস সিলিন্ডার"
+                width={24}
+                height={24}
+                className="h-6 w-auto object-contain"
+              />
+            </div>
             <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
               এলপি গ্যাস সিলিন্ডার এক্সপ্রেস বুকিং
             </h2>

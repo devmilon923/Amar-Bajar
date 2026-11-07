@@ -57,14 +57,17 @@ export function PharmacySection({ onAddToCart, onPrescriptionUploaded }: Pharmac
     <section id="pharmacy" className="py-8 sm:py-12 bg-slate-50/70 border-b border-slate-200/90">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header: Title -> Description */}
-        <div className="mb-5 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        {/* Section Header: Title + Best Seller Badge -> Description */}
+        <div className="mb-5 flex flex-col md:flex-row md:items-end justify-between gap-3">
           <div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
               <span className="text-xl">💊</span>
               <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
                 জরুরি ওষুধ ও ফার্মেসি
               </h2>
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-xs bg-sky-50 text-sky-800 border border-sky-200 text-[11px] font-bold shadow-2xs">
+                ⭐ সর্বাধিক প্রয়োজনীয়
+              </span>
             </div>
             <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl">
               ১০০% আসল প্রেসক্রিপশন মেডিসিন ও হেলথকেয়ার পণ্য — গ্রোসারির সাথে একই ব্যাগে ৩০ মিনিটে ডেলিভারি।
@@ -74,9 +77,9 @@ export function PharmacySection({ onAddToCart, onPrescriptionUploaded }: Pharmac
           {/* Quick link to pharmacy catalog page */}
           <Link
             href="/pharmacy"
-            className="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-sky-700 hover:text-sky-800 shrink-0 group py-1"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-sky-700 hover:text-sky-800 shrink-0 group py-1"
           >
-            <span>সব ওষুধ দেখুন</span>
+            <span>সব ওষুধ ও প্রেসক্রিপশন দেখুন</span>
             <ArrowRight className="size-3.5 group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </div>

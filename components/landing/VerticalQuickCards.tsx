@@ -1,4 +1,5 @@
 import * as React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Clock, ShieldCheck, Flame } from "lucide-react";
 
@@ -70,8 +71,14 @@ export function VerticalQuickCards() {
             className="group relative p-4 rounded-sm border border-orange-200 bg-gradient-to-br from-orange-50/70 to-white shadow-xs hover:border-orange-300 hover:shadow-md transition-all duration-150 flex flex-col justify-between"
           >
             <div className="flex items-start justify-between">
-              <div className="flex size-11 items-center justify-center rounded-sm bg-orange-600 text-white text-xl shadow-xs">
-                🛢️
+              <div className="flex size-11 items-center justify-center rounded-sm bg-orange-600 shadow-xs p-1.5">
+                <Image
+                  src="/hero/gas.png"
+                  alt="১২ কেজি এলপি গ্যাস সিলিন্ডার"
+                  width={36}
+                  height={36}
+                  className="size-full object-contain"
+                />
               </div>
               <span className="flex items-center gap-1 rounded-sm bg-orange-100 text-orange-800 text-[10px] font-bold px-2 py-0.5">
                 <Flame className="size-3 text-orange-600" />

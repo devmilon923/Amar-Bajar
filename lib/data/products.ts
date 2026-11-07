@@ -89,6 +89,7 @@ export const BAZAR_ITEMS: BazarItem[] = [
     price: 360,
     originalPrice: 390,
     image: "/products/rice.svg",
+    badge: "সর্বাধিক বিক্রিত",
     category: "staples",
   },
   {
@@ -110,6 +111,7 @@ export const BAZAR_ITEMS: BazarItem[] = [
     price: 135,
     originalPrice: 145,
     image: "/products/lentils.svg",
+    badge: "বেস্ট সেলার",
     category: "staples",
   },
   {
